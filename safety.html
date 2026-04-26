@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Safety Guide – Ambika HP Gas Agency</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #f0f4ff; }
+
+    /* NAVBAR */
+    .navbar { background: #003087; }
+    .navbar-brand { color: #FFD700 !important; font-weight: 700; font-size: 1.3rem; }
+    .nav-link { color: #fff !important; }
+    .nav-link:hover { color: #FFD700 !important; }
+    .nav-link.active { color: #FFD700 !important; }
+
+    /* EMERGENCY STRIP */
+    .emergency-strip {
+      background: #c0392b;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink {
+      0%,100% { background: #c0392b; }
+      50% { background: #e74c3c; }
+    }
+    .emergency-strip a { color: #FFD700; text-decoration: none; font-weight: 700; }
+
+    /* HERO */
+    .safety-hero {
+      background: linear-gradient(135deg, #003087 0%, #1a1a2e 100%);
+      color: white;
+      padding: 60px 0 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .safety-hero::before {
+      content: '🛡️';
+      position: absolute;
+      font-size: 200px;
+      opacity: 0.05;
+      top: -30px; right: -30px;
+    }
+    .safety-hero h1 { font-size: 2.3rem; font-weight: 800; }
+    .safety-hero p { opacity: 0.85; font-size: 1rem; margin-top: 10px; }
+
+    /* EMERGENCY NUMBERS */
+    .emergency-numbers {
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,48,135,0.12);
+      padding: 30px;
+      max-width: 860px;
+      margin: -30px auto 0;
+      position: relative;
+      z-index: 10;
+    }
+    .en-title { font-weight: 700; color: #c0392b; font-size: 1.1rem; margin-bottom: 18px; text-align: center; }
+    .en-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+    .en-card {
+      border-radius: 14px;
+      padding: 18px 14px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .en-card:hover { transform: translateY(-4px); }
+    .en-card.red    { background: #ffe0e0; border: 2px solid #e74c3c; }
+    .en-card.blue   { background: #e0f0ff; border: 2px solid #003087; }
+    .en-card.green  { background: #e6f9ef; border: 2px solid #1a7a4a; }
+    .en-card.yellow { background: #fffbe6; border: 2px solid #f39c12; }
+    .en-icon { font-size: 1.8rem; display: block; margin-bottom: 6px; }
+    .en-name { font-size: 0.82rem; color: #555; font-weight: 600; }
+    .en-number { font-size: 1.5rem; font-weight: 800; margin-top: 2px; }
+    .en-card.red    .en-number { color: #c0392b; }
+    .en-card.blue   .en-number { color: #003087; }
+    .en-card.green  .en-number { color: #1a7a4a; }
+    .en-card.yellow .en-number { color: #e67e22; }
+    .en-card a { text-decoration: none; color: inherit; }
+
+    /* SECTION */
+    .section { max-width: 860px; margin: 50px auto 0; padding: 0 16px; }
+    .sec-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #003087;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sec-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: #e0e7ff;
+      display: block;
+    }
+
+    /* LEAKAGE STEPS */
+    .leakage-alert {
+      background: linear-gradient(135deg, #c0392b, #e74c3c);
+      color: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .leakage-alert h4 { font-weight: 700; font-size: 1.2rem; margin-bottom: 4px; }
+    .leakage-alert p { opacity: 0.9; font-size: 0.92rem; }
+
+    .step-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; }
+    .step-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 16px rgba(0,48,135,0.08);
+      border-left: 4px solid #003087;
+      transition: transform 0.2s;
+    }
+    .step-card:hover { transform: translateY(-3px); }
+    .step-num {
+      width: 32px; height: 32px;
+      background: #003087;
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    .step-card h6 { font-weight: 700; color: #003087; margin-bottom: 4px; }
+    .step-card p  { font-size: 0.85rem; color: #555; margin: 0; }
+
+    /* DO DON'T */
+    .dd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media(max-width:600px) { .dd-grid { grid-template-columns: 1fr; } }
+
+    .do-card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 4px 16px rgba(0,48,135,0.08);
+    }
+    .do-card .card-head {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .do-card.dos .card-head  { color: #1a7a4a; border-color: #1a7a4a; }
+    .do-card.donts .card-head { color: #c0392b; border-color: #c0392b; }
+
+    .dd-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 0.88rem;
+      color: #333;
+    }
+    .dd-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+    /* VIDEO SECTION */
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .video-card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,48,135,0.08);
+      transition: transform 0.2s;
+    }
+    .video-card:hover { transform: translateY(-4px); }
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+    }
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .video-info { padding: 14px 16px; }
+    .video-info h6 { font-weight: 700; color: #003087; margin-bottom: 4px; font-size: 0.92rem; }
+    .video-info p  { font-size: 0.8rem; color: #888; margin: 0; }
+
+    /* TIPS GRID */
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    .tip-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0,48,135,0.08);
+      transition: transform 0.2s;
+    }
+    .tip-card:hover { transform: translateY(-4px); }
+    .tip-icon { font-size: 2.2rem; display: block; margin-bottom: 10px; }
+    .tip-card h6 { font-weight: 700; color: #003087; font-size: 0.9rem; margin-bottom: 6px; }
+    .tip-card p  { font-size: 0.8rem; color: #666; margin: 0; }
+
+    /* REGULATOR GUIDE */
+    .reg-steps { display: flex; flex-direction: column; gap: 12px; }
+    .reg-step {
+      background: white;
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 2px 10px rgba(0,48,135,0.07);
+    }
+    .reg-num {
+      width: 40px; height: 40px;
+      background: #FFD700;
+      color: #003087;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .reg-step p { margin: 0; font-size: 0.9rem; color: #333; }
+    .reg-step strong { color: #003087; }
+
+    /* SAFETY QUIZ */
+    .quiz-card {
+      background: white;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 8px 32px rgba(0,48,135,0.10);
+      margin-bottom: 50px;
+    }
+    .quiz-q { font-weight: 600; color: #003087; margin-bottom: 14px; font-size: 0.97rem; }
+    .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+    .quiz-opt {
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 2px solid #e0e7ff;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      background: white;
+    }
+    .quiz-opt:hover { border-color: #003087; background: #f0f4ff; }
+    .quiz-opt.correct { background: #e6f9ef; border-color: #1a7a4a; color: #1a7a4a; font-weight: 600; }
+    .quiz-opt.wrong   { background: #ffe0e0; border-color: #c0392b; color: #c0392b; }
+    .quiz-feedback { margin-top: 12px; font-size: 0.88rem; font-weight: 600; display: none; }
+    .quiz-nav { display: flex; gap: 10px; margin-top: 16px; }
+    .quiz-btn {
+      padding: 10px 24px;
+      border-radius: 10px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.9rem;
+    }
+    .quiz-btn.primary { background: #003087; color: white; }
+    .quiz-btn.secondary { background: #e0e7ff; color: #003087; }
+    .quiz-progress { font-size: 0.82rem; color: #888; margin-bottom: 18px; }
+
+    /* FOOTER */
+    footer { background: #003087; color: white; text-align: center; padding: 22px; font-size: 0.9rem; }
+    footer a { color: #FFD700; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🔵 Ambika HP Gas Agency</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="booking.html">Book Cylinder</a></li>
+        <li class="nav-item"><a class="nav-link" href="tracking.html">Track Order</a></li>
+        <li class="nav-item"><a class="nav-link" href="complaint.html">Complaint</a></li>
+        <li class="nav-item"><a class="nav-link active" href="safety.html">Safety</a></li>
+        <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- EMERGENCY STRIP -->
+<div class="emergency-strip">
+  🚨 Gas Emergency? Call immediately: <a href="tel:1906">HP Gas: 1906</a> &nbsp;|&nbsp; <a href="tel:101">Fire: 101</a> &nbsp;|&nbsp; <a href="tel:108">Ambulance: 108</a>
+</div>
+
+<!-- HERO -->
+<div class="safety-hero">
+  <div class="container">
+    <h1>🛡️ Gas Safety Guide</h1>
+    <p>Your safety is our top priority. Know what to do in emergencies.</p>
+  </div>
+</div>
+
+<div class="container" style="padding: 0 16px;">
+
+  <!-- EMERGENCY NUMBERS -->
+  <div class="emergency-numbers">
+    <div class="en-title">🚨 Emergency Contact Numbers</div>
+    <div class="en-grid">
+      <div class="en-card red">
+        <span class="en-icon">🔥</span>
+        <div class="en-name">HP Gas Helpline</div>
+        <div class="en-number"><a href="tel:1906">1906</a></div>
+      </div>
+      <div class="en-card red">
+        <span class="en-icon">🚒</span>
+        <div class="en-name">Fire Brigade</div>
+        <div class="en-number"><a href="tel:101">101</a></div>
+      </div>
+      <div class="en-card green">
+        <span class="en-icon">🚑</span>
+        <div class="en-name">Ambulance</div>
+        <div class="en-number"><a href="tel:108">108</a></div>
+      </div>
+      <div class="en-card blue">
+        <span class="en-icon">👮</span>
+        <div class="en-name">Police</div>
+        <div class="en-number"><a href="tel:100">100</a></div>
+      </div>
+      <div class="en-card yellow">
+        <span class="en-icon">📞</span>
+        <div class="en-name">Disaster Mgmt</div>
+        <div class="en-number"><a href="tel:1077">1077</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GAS LEAKAGE SECTION -->
+  <div class="section">
+    <div class="sec-title">💨 Gas Leakage — What To Do?</div>
+
+    <div class="leakage-alert">
+      <h4>⚠️ SMELL GAS? ACT IMMEDIATELY!</h4>
+      <p>Do NOT switch on lights, fans or any electrical appliance. Follow these steps:</p>
+    </div>
+
+    <div class="step-cards">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h6>🔴 Turn OFF Regulator</h6>
+        <p>Immediately turn off the gas regulator on the cylinder. This stops gas supply.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h6>🪟 Open All Windows & Doors</h6>
+        <p>Ventilate the area immediately. Let fresh air in and gas out.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h6>🚫 No Electrical Switches</h6>
+        <p>Do NOT touch any switches — lights, fans, phone chargers. A spark can cause explosion.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h6>🔥 No Flames or Lighters</h6>
+        <p>Do NOT light matchsticks, lighters or candles under any circumstances.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <h6>🏃 Evacuate Immediately</h6>
+        <p>Take everyone out of the house. Move away from the building quickly.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">6</div>
+        <h6>📞 Call 1906 / 101</h6>
+        <p>Call HP Gas emergency (1906) and Fire Brigade (101) from outside the building.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DO'S AND DON'TS -->
+  <div class="section" style="margin-top: 44px;">
+    <div class="sec-title">✅ Do's & ❌ Don'ts</div>
+    <div class="dd-grid">
+      <div class="do-card dos">
+        <div class="card-head">✅ DO's — Always Follow</div>
+        <div class="dd-item"><span class="dd-icon">✅</span> Check rubber tube regularly for cracks or damage</div>
+        <div class="dd-item"><span class="dd-icon">✅</span> Keep cylinder upright at all times</div>
+        <div class="dd-item"><span class="dd-icon">✅</span> Use ISI-marked regulators and rubber pipes only</div>
+        <div class="dd-item"><span class="dd-icon">✅</span> Turn off regulator when not in use</div>
+        <div class="dd-item"><span class="dd-icon">✅</span> Keep cylinder away from heat sources</div>
+        <div class="dd-item"><span class="dd-icon">✅</span> Store cylinder in well-ventilated area</div>
+        <div class="dd-item"><span class="dd-icon">✅</span> Check for leakage using soap water (NOT flame)</div>
+        <div class="dd-item"><span class="dd-icon">✅</span> Change rubber pipe every 2 years</div>
+      </div>
+      <div class="do-card donts">
+        <div class="card-head">❌ DON'Ts — Never Do These</div>
+        <div class="dd-item"><span class="dd-icon">❌</span> Never check for gas leakage with a flame or lighter</div>
+        <div class="dd-item"><span class="dd-icon">❌</span> Never keep cylinder in horizontal (lying) position</div>
+        <div class="dd-item"><span class="dd-icon">❌</span> Never use cylinder near open fire or stove without pipe</div>
+        <div class="dd-item"><span class="dd-icon">❌</span> Never fill gas into another container</div>
+        <div class="dd-item"><span class="dd-icon">❌</span> Never tamper with cylinder valves or safety cap</div>
+        <div class="dd-item"><span class="dd-icon">❌</span> Never store cylinder in bedroom or closed room</div>
+        <div class="dd-item"><span class="dd-icon">❌</span> Never ignore even a slight smell of gas</div>
+        <div class="dd-item"><span class="dd-icon">❌</span> Never leave gas stove unattended while cooking</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO SECTION -->
+  <div class="section" style="margin-top: 44px;">
+    <div class="sec-title">🎥 Safety Videos</div>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/_HbxOL03r-Q?si=p_ufMjdhqIU1qv9y"allowfullscreen></iframe>
+        </div>
+        <div class="video-info">
+          <h6>HP Gas Safety Tips</h6>
+          <p>Official HP Gas safety guidelines — must watch</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/7lF7Z6QHaK8" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <h6>LPG Cylinder Safety at Home</h6>
+          <p>How to safely handle LPG cylinders at home</p>
+        </div>
+      </div>
+      <div class="video-card">
+        <div class="video-wrapper">
+          <iframe src="https://www.youtube.com/embed/T7G4ASDKFPM" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <h6>Gas Leakage — What To Do</h6>
+          <p>Step-by-step emergency response guide</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAFETY TIPS -->
+  <div class="section" style="margin-top: 44px;">
+    <div class="sec-title">💡 General Safety Tips</div>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <span class="tip-icon">🔧</span>
+        <h6>Regular Maintenance</h6>
+        <p>Get your regulator and pipe checked every 6 months by a certified technician.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">🧼</span>
+        <h6>Soap Water Test</h6>
+        <p>Apply soap water on joints to check for leaks. Bubbles indicate gas escape.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">🌬️</span>
+        <h6>Good Ventilation</h6>
+        <p>Always cook in a well-ventilated kitchen. Keep windows open while cooking.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">🛑</span>
+        <h6>Off After Use</h6>
+        <p>Always turn off the burner and regulator after cooking. Never leave gas on.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">📋</span>
+        <h6>ISI Certified</h6>
+        <p>Only use ISI-marked pipes, regulators and stoves. Avoid local/cheap products.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">👶</span>
+        <h6>Keep Children Away</h6>
+        <p>Never let children play near gas cylinders or stoves. Keep them away from kitchen.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">🧯</span>
+        <h6>Fire Extinguisher</h6>
+        <p>Keep a small fire extinguisher in your kitchen. Know how to use it.</p>
+      </div>
+      <div class="tip-card">
+        <span class="tip-icon">📅</span>
+        <h6>Expiry Check</h6>
+        <p>LPG rubber pipes expire every 2 years. Check manufacturing date on the pipe.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGULATOR GUIDE -->
+  <div class="section" style="margin-top: 44px;">
+    <div class="sec-title">🔩 Regulator Safety Guide</div>
+    <div class="reg-steps">
+      <div class="reg-step">
+        <div class="reg-num">1</div>
+        <p><strong>Check before connecting:</strong> Inspect the regulator for any damage, cracks or rust before attaching to cylinder.</p>
+      </div>
+      <div class="reg-step">
+        <div class="reg-num">2</div>
+        <p><strong>Proper attachment:</strong> Connect the regulator firmly to the cylinder valve. It should click into place securely.</p>
+      </div>
+      <div class="reg-step">
+        <div class="reg-num">3</div>
+        <p><strong>Test for leaks:</strong> Apply soap water around the regulator joint. No bubbles means it's sealed properly.</p>
+      </div>
+      <div class="reg-step">
+        <div class="reg-num">4</div>
+        <p><strong>ON/OFF usage:</strong> Always turn regulator to OFF position when the stove is not in use, especially at night.</p>
+      </div>
+      <div class="reg-step">
+        <div class="reg-num">5</div>
+        <p><strong>Replace every 5 years:</strong> Regulators should be replaced every 5 years. Check ISI mark and expiry date.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAFETY QUIZ -->
+  <div class="section" style="margin-top: 44px;">
+    <div class="sec-title">🧠 Safety Knowledge Quiz</div>
+    <div class="quiz-card">
+      <div class="quiz-progress" id="quizProgress">Question 1 of 5</div>
+      <div class="quiz-q" id="quizQ">Loading...</div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="quiz-feedback" id="quizFeedback"></div>
+      <div class="quiz-nav">
+        <button class="quiz-btn primary" id="nextBtn" onclick="nextQuestion()" style="display:none;">Next Question →</button>
+      </div>
+      <div id="quizResult" style="display:none; text-align:center; padding:20px 0;">
+        <div style="font-size:3rem;" id="quizEmoji">🏆</div>
+        <h5 style="color:#003087; margin-top:10px;" id="quizScore">—</h5>
+        <p style="color:#555; font-size:0.9rem;" id="quizMsg">—</p>
+        <button class="quiz-btn primary" onclick="restartQuiz()" style="margin-top:14px;">🔄 Try Again</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>🔵 Ambika HP Gas Agency &nbsp;|&nbsp; Emergency: <a href="tel:1906">1906</a> &nbsp;|&nbsp; Fire: <a href="tel:101">101</a> &nbsp;|&nbsp; Ambulance: <a href="tel:108">108</a></p>
+  <p style="margin-top:6px; opacity:0.7;">&copy; 2025 Ambika HP Gas Agency. All rights reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// SAFETY QUIZ
+const questions = [
+  {
+    q: "What should you do FIRST if you smell gas at home?",
+    options: ["Turn on the fan for ventilation", "Turn OFF the regulator on the cylinder", "Call your neighbor", "Light a candle to find the leak"],
+    answer: 1,
+    explain: "✅ Correct! Always turn OFF the regulator first to stop the gas supply."
+  },
+  {
+    q: "How should you check for a gas leak safely?",
+    options: ["Use a lighter or match", "Apply soap water on joints and look for bubbles", "Smell near the cylinder", "Use a candle"],
+    answer: 1,
+    explain: "✅ Correct! Soap water is the safest way. Bubbles indicate a gas leak."
+  },
+  {
+    q: "How often should you replace the LPG rubber pipe?",
+    options: ["Every 5 years", "Every 10 years", "Every 2 years", "Never, if it looks fine"],
+    answer: 2,
+    explain: "✅ Correct! LPG rubber pipes should be replaced every 2 years regardless of appearance."
+  },
+  {
+    q: "What should you NOT do during a gas leak?",
+    options: ["Open windows and doors", "Turn off regulator", "Switch on the light or fan", "Evacuate the area"],
+    answer: 2,
+    explain: "✅ Correct! Never switch on/off any electrical appliance — even a small spark can ignite gas."
+  },
+  {
+    q: "Which number should you call for HP Gas emergency?",
+    options: ["100", "108", "1906", "112"],
+    answer: 2,
+    explain: "✅ Correct! 1906 is the HP Gas emergency helpline, available 24/7."
+  }
+];
+
+let current = 0, score = 0, answered = false;
+
+function loadQuestion() {
+  answered = false;
+  const q = questions[current];
+  document.getElementById('quizProgress').textContent = `Question ${current+1} of ${questions.length}`;
+  document.getElementById('quizQ').textContent = q.q;
+  document.getElementById('quizFeedback').style.display = 'none';
+  document.getElementById('nextBtn').style.display = 'none';
+
+  const opts = document.getElementById('quizOptions');
+  opts.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt;
+    btn.onclick = () => selectAnswer(i, btn);
+    opts.appendChild(btn);
+  });
+}
+
+function selectAnswer(idx, btn) {
+  if (answered) return;
+  answered = true;
+  const q = questions[current];
+  const allOpts = document.querySelectorAll('.quiz-opt');
+  allOpts.forEach(b => b.style.pointerEvents = 'none');
+
+  if (idx === q.answer) {
+    btn.classList.add('correct');
+    score++;
+    showFeedback(q.explain, '#1a7a4a');
+  } else {
+    btn.classList.add('wrong');
+    allOpts[q.answer].classList.add('correct');
+    showFeedback('❌ Incorrect. ' + q.explain, '#c0392b');
+  }
+  document.getElementById('nextBtn').style.display = 'inline-block';
+  if (current === questions.length - 1) {
+    document.getElementById('nextBtn').textContent = 'See Results 🏆';
+  }
+}
+
+function showFeedback(msg, color) {
+  const fb = document.getElementById('quizFeedback');
+  fb.textContent = msg;
+  fb.style.color = color;
+  fb.style.display = 'block';
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= questions.length) {
+    showResult();
+  } else {
+    loadQuestion();
+  }
+}
+
+function showResult() {
+  document.getElementById('quizQ').style.display = 'none';
+  document.getElementById('quizOptions').style.display = 'none';
+  document.getElementById('quizFeedback').style.display = 'none';
+  document.getElementById('nextBtn').style.display = 'none';
+  document.getElementById('quizProgress').style.display = 'none';
+
+  const pct = (score / questions.length) * 100;
+  let emoji = '🏆', msg = '';
+  if (pct === 100) { emoji = '🥇'; msg = 'Perfect score! You are a gas safety expert!'; }
+  else if (pct >= 60) { emoji = '👍'; msg = 'Good job! Review the missed questions to stay safe.'; }
+  else { emoji = '📖'; msg = 'Please read the safety guide carefully. Your safety matters!'; }
+
+  document.getElementById('quizEmoji').textContent = emoji;
+  document.getElementById('quizScore').textContent = `You scored ${score} / ${questions.length}`;
+  document.getElementById('quizMsg').textContent = msg;
+  document.getElementById('quizResult').style.display = 'block';
+}
+
+function restartQuiz() {
+  current = 0; score = 0;
+  document.getElementById('quizResult').style.display = 'none';
+  document.getElementById('quizQ').style.display = 'block';
+  document.getElementById('quizOptions').style.display = 'flex';
+  document.getElementById('quizProgress').style.display = 'block';
+  document.getElementById('quizOptions').style.flexDirection = 'column';
+  loadQuestion();
+}
+
+loadQuestion();
+</script>
+</body>
+</html>

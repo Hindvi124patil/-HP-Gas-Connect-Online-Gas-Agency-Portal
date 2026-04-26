@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pricing – Ambika HP Gas Agency</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #f0f4ff; }
+
+    /* NAVBAR */
+    .navbar { background: #003087; }
+    .navbar-brand { color: #FFD700 !important; font-weight: 700; font-size: 1.3rem; }
+    .nav-link { color: #fff !important; }
+    .nav-link:hover, .nav-link.active { color: #FFD700 !important; }
+
+    /* TICKER */
+    .price-ticker {
+      background: #003087;
+      color: #FFD700;
+      padding: 9px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .ticker-inner {
+      display: inline-block;
+      animation: tickerScroll 22s linear infinite;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+    }
+    @keyframes tickerScroll {
+      from { transform: translateX(100vw); }
+      to   { transform: translateX(-100%); }
+    }
+
+    /* HERO */
+    .pricing-hero {
+      background: linear-gradient(135deg, #003087 0%, #0055c4 100%);
+      color: white;
+      padding: 55px 0 50px;
+      text-align: center;
+    }
+    .pricing-hero h1 { font-size: 2.2rem; font-weight: 800; }
+    .pricing-hero p  { opacity: 0.85; font-size: 1rem; margin-top: 8px; }
+    .last-updated {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 5px 16px;
+      font-size: 0.82rem;
+      margin-top: 12px;
+    }
+
+    /* SECTION */
+    .section { max-width: 900px; margin: 0 auto; padding: 44px 16px 0; }
+    .sec-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #003087;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sec-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: #e0e7ff;
+    }
+
+    /* PRICE CARDS */
+    .price-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .price-card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px 24px;
+      box-shadow: 0 6px 24px rgba(0,48,135,0.10);
+      text-align: center;
+      position: relative;
+      transition: transform 0.2s;
+      border-top: 5px solid #003087;
+    }
+    .price-card:hover { transform: translateY(-6px); }
+    .price-card.popular { border-top-color: #FFD700; }
+    .popular-badge {
+      position: absolute;
+      top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: #FFD700;
+      color: #003087;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .cyl-icon { font-size: 2.8rem; display: block; margin-bottom: 10px; }
+    .cyl-name { font-size: 1rem; font-weight: 700; color: #003087; }
+    .cyl-weight { font-size: 0.82rem; color: #888; margin-top: 2px; }
+    .cyl-price {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #003087;
+      margin: 14px 0 4px;
+    }
+    .cyl-price span { font-size: 1rem; font-weight: 500; color: #888; }
+    .price-note { font-size: 0.78rem; color: #888; margin-bottom: 16px; }
+    .btn-book {
+      display: block;
+      background: #003087;
+      color: white;
+      border-radius: 10px;
+      padding: 11px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-book:hover { background: #0044cc; color: white; }
+    .price-card.popular .btn-book { background: #FFD700; color: #003087; }
+    .price-card.popular .btn-book:hover { background: #e6c200; }
+
+    /* SUBSIDY TABLE */
+    .subsidy-card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 6px 24px rgba(0,48,135,0.08);
+    }
+    .subsidy-card table { width: 100%; border-collapse: collapse; }
+    .subsidy-card th {
+      background: #003087;
+      color: white;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-align: left;
+    }
+    .subsidy-card th:first-child { border-radius: 8px 0 0 0; }
+    .subsidy-card th:last-child  { border-radius: 0 8px 0 0; }
+    .subsidy-card td {
+      padding: 11px 16px;
+      font-size: 0.88rem;
+      border-bottom: 1px solid #f0f4ff;
+      color: #333;
+    }
+    .subsidy-card tr:last-child td { border-bottom: none; }
+    .subsidy-card tr:nth-child(even) { background: #f8f9ff; }
+    .badge-sub { background: #e6f9ef; color: #1a7a4a; border-radius: 8px; padding: 3px 10px; font-size: 0.8rem; font-weight: 600; }
+    .badge-nosub { background: #ffe0e0; color: #c0392b; border-radius: 8px; padding: 3px 10px; font-size: 0.8rem; font-weight: 600; }
+
+    /* PRICE CALCULATOR */
+    .calc-card {
+      background: white;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 6px 24px rgba(0,48,135,0.08);
+    }
+    .calc-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+    .calc-field { flex: 1; min-width: 180px; }
+    .calc-label { font-size: 0.88rem; font-weight: 600; color: #333; margin-bottom: 6px; display: block; }
+    .calc-select, .calc-input {
+      width: 100%;
+      border: 2px solid #e0e7ff;
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 0.92rem;
+      font-family: 'Poppins', sans-serif;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .calc-select:focus, .calc-input:focus { border-color: #003087; }
+    .btn-calc {
+      background: #FFD700;
+      color: #003087;
+      border: none;
+      border-radius: 10px;
+      padding: 13px 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      transition: background 0.2s;
+    }
+    .btn-calc:hover { background: #e6c200; }
+    .calc-result {
+      display: none;
+      background: #f0f4ff;
+      border-radius: 14px;
+      padding: 22px;
+      margin-top: 18px;
+      animation: fadeIn 0.3s;
+    }
+    .calc-result.show { display: block; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);} }
+    .cr-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e0e7ff; font-size: 0.9rem; }
+    .cr-row:last-child { border-bottom: none; font-weight: 700; color: #003087; font-size: 1rem; }
+    .cr-label { color: #555; }
+    .cr-value { font-weight: 600; color: #333; }
+
+    /* PRICE HISTORY */
+    .history-card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 6px 24px rgba(0,48,135,0.08);
+    }
+    .history-list { display: flex; flex-direction: column; gap: 10px; }
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8f9ff;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.88rem;
+    }
+    .hi-date { color: #888; font-weight: 500; }
+    .hi-price { font-weight: 700; color: #003087; font-size: 1rem; }
+    .hi-change { font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 8px; }
+    .hi-up   { background: #e6f9ef; color: #1a7a4a; }
+    .hi-down { background: #ffe0e0; color: #c0392b; }
+    .hi-same { background: #f0f4ff; color: #555; }
+
+    /* FAQ */
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    .faq-item {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,48,135,0.06);
+    }
+    .faq-q {
+      padding: 16px 20px;
+      font-weight: 600;
+      color: #003087;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.92rem;
+      user-select: none;
+    }
+    .faq-q:hover { background: #f0f4ff; }
+    .faq-arrow { font-size: 1rem; transition: transform 0.3s; }
+    .faq-a {
+      display: none;
+      padding: 0 20px 16px;
+      font-size: 0.87rem;
+      color: #555;
+      line-height: 1.6;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-item.open .faq-a { display: block; }
+
+    /* FOOTER */
+    footer { background: #003087; color: white; text-align: center; padding: 22px; margin-top: 60px; font-size: 0.9rem; }
+    footer a { color: #FFD700; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🔵 Ambika HP Gas Agency</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="booking.html">Book Cylinder</a></li>
+        <li class="nav-item"><a class="nav-link" href="tracking.html">Track Order</a></li>
+        <li class="nav-item"><a class="nav-link" href="complaint.html">Complaint</a></li>
+        <li class="nav-item"><a class="nav-link" href="safety.html">Safety</a></li>
+        <li class="nav-item"><a class="nav-link active" href="pricing.html">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- PRICE TICKER -->
+<div class="price-ticker">
+  <span class="ticker-inner">
+    🔵 HP Gas 14.2 kg — ₹903.00 &nbsp;|&nbsp; 🔵 HP Gas 5 kg — ₹474.00 &nbsp;|&nbsp;
+    🔵 Commercial 19 kg — ₹1,744.50 &nbsp;|&nbsp; 🔵 Commercial 47.5 kg — ₹4,361.00 &nbsp;|&nbsp;
+    📅 Prices updated: 1 April 2025 &nbsp;|&nbsp; 📞 Helpline: 1906 &nbsp;|&nbsp;
+    🔵 HP Gas 14.2 kg — ₹903.00 &nbsp;|&nbsp; 🔵 HP Gas 5 kg — ₹474.00 &nbsp;|&nbsp;
+    🔵 Commercial 19 kg — ₹1,744.50 &nbsp;|&nbsp;
+  </span>
+</div>
+
+<!-- HERO -->
+<div class="pricing-hero">
+  <div class="container">
+    <h1>💰 LPG Cylinder Pricing</h1>
+    <p>Current HP Gas cylinder rates for Nashik, Maharashtra</p>
+    <div class="last-updated">📅 Last Updated: 1 April 2025</div>
+  </div>
+</div>
+
+<div class="container" style="padding-bottom: 20px;">
+
+  <!-- CURRENT PRICES -->
+  <div class="section">
+    <div class="sec-title">🛢️ Current Cylinder Prices</div>
+    <div class="price-grid">
+
+      <div class="price-card popular">
+        <div class="popular-badge">⭐ Most Popular</div>
+        <span class="cyl-icon">🔵</span>
+        <div class="cyl-name">Domestic Cylinder</div>
+        <div class="cyl-weight">14.2 kg — Household Use</div>
+        <div class="cyl-price">₹903 <span>/ cylinder</span></div>
+        <div class="price-note">Subsidy available for eligible customers</div>
+        <a href="booking.html" class="btn-book">📝 Book Now</a>
+      </div>
+
+      <div class="price-card">
+        <span class="cyl-icon">🟡</span>
+        <div class="cyl-name">Small Cylinder</div>
+        <div class="cyl-weight">5 kg — Kitchen / Portable</div>
+        <div class="cyl-price">₹474 <span>/ cylinder</span></div>
+        <div class="price-note">No subsidy on 5 kg cylinder</div>
+        <a href="booking.html" class="btn-book">📝 Book Now</a>
+      </div>
+
+      <div class="price-card">
+        <span class="cyl-icon">🟠</span>
+        <div class="cyl-name">Commercial Cylinder</div>
+        <div class="cyl-weight">19 kg — Restaurants / Shops</div>
+        <div class="cyl-price">₹1,744 <span>/ cylinder</span></div>
+        <div class="price-note">For commercial establishments only</div>
+        <a href="booking.html" class="btn-book">📝 Book Now</a>
+      </div>
+
+      <div class="price-card">
+        <span class="cyl-icon">🔴</span>
+        <div class="cyl-name">Industrial Cylinder</div>
+        <div class="cyl-weight">47.5 kg — Industrial Use</div>
+        <div class="cyl-price">₹4,361 <span>/ cylinder</span></div>
+        <div class="price-note">Bulk orders available on request</div>
+        <a href="contact.html" class="btn-book">📞 Contact Us</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUBSIDY INFO -->
+  <div class="section">
+    <div class="sec-title">🏦 Subsidy Information</div>
+    <div class="subsidy-card">
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Cylinder Type</th>
+            <th>Market Price</th>
+            <th>Subsidy</th>
+            <th>Net Price</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BPL / PMUY Beneficiary</td>
+            <td>14.2 kg</td>
+            <td>₹903.00</td>
+            <td>₹200.00</td>
+            <td>₹703.00</td>
+            <td><span class="badge-sub">Subsidy Available</span></td>
+          </tr>
+          <tr>
+            <td>General Household</td>
+            <td>14.2 kg</td>
+            <td>₹903.00</td>
+            <td>₹0</td>
+            <td>₹903.00</td>
+            <td><span class="badge-nosub">No Subsidy</span></td>
+          </tr>
+          <tr>
+            <td>Any Customer</td>
+            <td>5 kg</td>
+            <td>₹474.00</td>
+            <td>₹0</td>
+            <td>₹474.00</td>
+            <td><span class="badge-nosub">No Subsidy</span></td>
+          </tr>
+          <tr>
+            <td>Commercial</td>
+            <td>19 kg</td>
+            <td>₹1,744.50</td>
+            <td>₹0</td>
+            <td>₹1,744.50</td>
+            <td><span class="badge-nosub">No Subsidy</span></td>
+          </tr>
+          <tr>
+            <td>Industrial</td>
+            <td>47.5 kg</td>
+            <td>₹4,361.00</td>
+            <td>₹0</td>
+            <td>₹4,361.00</td>
+            <td><span class="badge-nosub">No Subsidy</span></td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.8rem; color:#888; margin-top:14px;">
+        ℹ️ Subsidy under PMUY (Pradhan Mantri Ujjwala Yojana) is credited directly to bank account (DBTL scheme). Prices may vary slightly by city.
+      </p>
+    </div>
+  </div>
+
+  <!-- PRICE CALCULATOR -->
+  <div class="section">
+    <div class="sec-title">🧮 Price Calculator</div>
+    <div class="calc-card">
+      <p style="color:#555; font-size:0.9rem; margin-bottom:20px;">Calculate the total cost of your cylinder order before booking.</p>
+      <div class="calc-row">
+        <div class="calc-field">
+          <label class="calc-label">Cylinder Type</label>
+          <select class="calc-select" id="calcType" onchange="updateCalc()">
+            <option value="903">14.2 kg Domestic — ₹903</option>
+            <option value="474">5 kg Small — ₹474</option>
+            <option value="1744.50">19 kg Commercial — ₹1,744.50</option>
+            <option value="4361">47.5 kg Industrial — ₹4,361</option>
+          </select>
+        </div>
+        <div class="calc-field">
+          <label class="calc-label">Quantity</label>
+          <input type="number" class="calc-input" id="calcQty" value="1" min="1" max="10" oninput="updateCalc()"/>
+        </div>
+        <div class="calc-field">
+          <label class="calc-label">Subsidy Eligible?</label>
+          <select class="calc-select" id="calcSub" onchange="updateCalc()">
+            <option value="0">No Subsidy</option>
+            <option value="200">Yes — PMUY Beneficiary (₹200 off)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-calc" onclick="updateCalc()">🧮 Calculate</button>
+
+      <div class="calc-result" id="calcResult">
+        <div class="cr-row">
+          <span class="cr-label">Cylinder Price</span>
+          <span class="cr-value" id="crUnit">—</span>
+        </div>
+        <div class="cr-row">
+          <span class="cr-label">Quantity</span>
+          <span class="cr-value" id="crQty">—</span>
+        </div>
+        <div class="cr-row">
+          <span class="cr-label">Subtotal</span>
+          <span class="cr-value" id="crSub">—</span>
+        </div>
+        <div class="cr-row">
+          <span class="cr-label">Subsidy Deduction</span>
+          <span class="cr-value" id="crSubAmt" style="color:#1a7a4a;">—</span>
+        </div>
+        <div class="cr-row">
+          <span class="cr-label">Delivery Charges</span>
+          <span class="cr-value">FREE 🎉</span>
+        </div>
+        <div class="cr-row">
+          <span class="cr-label">Total Amount Payable</span>
+          <span class="cr-value" id="crTotal">—</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICE HISTORY -->
+  <div class="section">
+    <div class="sec-title">📈 Price History (14.2 kg Domestic)</div>
+    <div class="history-card">
+      <div class="history-list">
+        <div class="history-item">
+          <span class="hi-date">📅 1 April 2025</span>
+          <span class="hi-price">₹903.00</span>
+          <span class="hi-change hi-same">No Change</span>
+        </div>
+        <div class="history-item">
+          <span class="hi-date">📅 1 March 2025</span>
+          <span class="hi-price">₹903.00</span>
+          <span class="hi-change hi-down">↓ ₹14 Decrease</span>
+        </div>
+        <div class="history-item">
+          <span class="hi-date">📅 1 February 2025</span>
+          <span class="hi-price">₹917.00</span>
+          <span class="hi-change hi-up">↑ ₹22 Increase</span>
+        </div>
+        <div class="history-item">
+          <span class="hi-date">📅 1 January 2025</span>
+          <span class="hi-price">₹895.00</span>
+          <span class="hi-change hi-down">↓ ₹8 Decrease</span>
+        </div>
+        <div class="history-item">
+          <span class="hi-date">📅 1 December 2024</span>
+          <span class="hi-price">₹903.00</span>
+          <span class="hi-change hi-same">No Change</span>
+        </div>
+        <div class="history-item">
+          <span class="hi-date">📅 1 November 2024</span>
+          <span class="hi-price">₹903.00</span>
+          <span class="hi-change hi-up">↑ ₹50 Increase</span>
+        </div>
+        <div class="history-item">
+          <span class="hi-date">📅 1 October 2024</span>
+          <span class="hi-price">₹853.00</span>
+          <span class="hi-change hi-down">↓ ₹50 Decrease</span>
+        </div>
+      </div>
+      <p style="font-size:0.78rem; color:#aaa; margin-top:14px;">* Prices are for Nashik, Maharashtra. Rates are revised monthly by oil companies.</p>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section" style="margin-bottom: 10px;">
+    <div class="sec-title">❓ Frequently Asked Questions</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Why does the LPG price change every month?
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">LPG prices are revised on the 1st of every month by oil marketing companies (HPCL, BPCL, IOC) based on international crude oil prices and exchange rates. Prices may increase or decrease depending on global market conditions.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How does subsidy get credited to my account?
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">Under the DBTL (Direct Benefit Transfer for LPG) scheme, eligible customers pay the market price at the time of purchase. The subsidy amount is then transferred directly to the linked bank account within a few days of purchase.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Am I eligible for subsidy on 14.2 kg cylinder?
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">Subsidy eligibility is determined by the government. PMUY (Pradhan Mantri Ujjwala Yojana) beneficiaries receive subsidy. If your annual family income is above ₹10 lakhs or if any member pays income tax, you may not be eligible. Check your eligibility on the HP Gas website or contact us.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Are there any delivery charges?
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">No! Ambika HP Gas Agency provides FREE home delivery for all cylinder types within the service area of Nashik. No extra delivery charges are applicable.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Can I book more than one cylinder at a time?
+          <span class="faq-arrow">▼</span>
+        </div>
+        <div class="faq-a">As per government rules, each household connection is eligible for a maximum of 12 subsidized cylinders per year (14.2 kg). You can book one cylinder at a time after the previous one is delivered. Commercial connections have different limits.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>🔵 Ambika HP Gas Agency &nbsp;|&nbsp; Emergency: <a href="tel:1906">1906</a> &nbsp;|&nbsp; Fire: <a href="tel:101">101</a></p>
+  <p style="margin-top:6px; opacity:0.7;">&copy; 2025 Ambika HP Gas Agency. All rights reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+// PRICE CALCULATOR
+function updateCalc() {
+  const price  = parseFloat(document.getElementById('calcType').value);
+  const qty    = parseInt(document.getElementById('calcQty').value) || 1;
+  const subAmt = parseFloat(document.getElementById('calcSub').value);
+
+  const subtotal   = price * qty;
+  const totalSub   = subAmt * qty;
+  const total      = subtotal - totalSub;
+
+  document.getElementById('crUnit').textContent  = '₹' + price.toFixed(2);
+  document.getElementById('crQty').textContent   = qty + ' cylinder(s)';
+  document.getElementById('crSub').textContent   = '₹' + subtotal.toFixed(2);
+  document.getElementById('crSubAmt').textContent = totalSub > 0 ? '- ₹' + totalSub.toFixed(2) : '₹0 (Not eligible)';
+  document.getElementById('crTotal').textContent = '₹' + total.toFixed(2);
+  document.getElementById('calcResult').classList.add('show');
+}
+
+// FAQ TOGGLE
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>

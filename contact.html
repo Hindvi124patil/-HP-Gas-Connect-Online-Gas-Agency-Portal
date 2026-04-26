@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us & About - Ambika HP Gas Agency</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: #f5f7fa; color: #333; }
+
+        /* ===== HEADER ===== */
+        .page-header {
+            background: linear-gradient(135deg, #0066CC 0%, #004499 50%, #002266 100%);
+            color: white;
+            padding: 80px 20px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,200,0,0.1) 0%, transparent 60%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100%{transform:scale(1);opacity:0.5;} 50%{transform:scale(1.1);opacity:1;} }
+        .page-header h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 10px; position: relative; }
+        .page-header p { font-size: 1.1rem; opacity: 0.9; position: relative; }
+        .header-badge {
+            display: inline-block;
+            background: #FFC200;
+            color: #003399;
+            padding: 5px 18px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        /* ===== NAV ===== */
+        .top-nav {
+            background: #003399;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+        }
+        .nav-logo { color: white; font-weight: 700; font-size: 1.1rem; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .nav-logo img { width: 32px; height: 32px; border-radius: 50%; }
+        .nav-links { display: flex; gap: 5px; flex-wrap: wrap; }
+        .nav-links a { color: rgba(255,255,255,0.85); text-decoration: none; font-size: 0.8rem; padding: 6px 12px; border-radius: 20px; transition: all 0.3s; }
+        .nav-links a:hover, .nav-links a.active { background: #FFC200; color: #003399; font-weight: 600; }
+
+        /* ===== TABS ===== */
+        .page-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid #e8edf5;
+            overflow-x: auto;
+            
+        }
+        .tab-btn {
+            padding: 15px 25px;
+            border: none;
+            background: none;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s;
+        }
+        .tab-btn.active { color: #003399; border-bottom-color: #003399; font-weight: 700; }
+        .tab-btn i { margin-right: 6px; }
+
+        /* ===== CONTENT ===== */
+        .section { display: none; padding: 30px 15px; max-width: 1100px; margin: 0 auto; }
+        .section.active { display: block; }
+
+        /* ===== CONTACT CARDS ===== */
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .contact-card {
+            background: white;
+            border-radius: 16px;
+            padding: 28px 22px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,102,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 4px solid;
+            cursor: pointer;
+        }
+        .contact-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,102,0.15); }
+        .contact-card.blue { border-color: #003399; }
+        .contact-card.yellow { border-color: #FFC200; }
+        .contact-card.green { border-color: #28a745; }
+        .contact-card.red { border-color: #dc3545; }
+        .contact-icon {
+            width: 65px; height: 65px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 1.6rem;
+        }
+        .blue .contact-icon { background: #e8f0fe; color: #003399; }
+        .yellow .contact-icon { background: #fff8e1; color: #f59e0b; }
+        .green .contact-icon { background: #d4edda; color: #28a745; }
+        .red .contact-icon { background: #fde8e8; color: #dc3545; }
+        .contact-card h3 { font-size: 1rem; font-weight: 700; color: #222; margin-bottom: 8px; }
+        .contact-card .value { font-size: 1.2rem; font-weight: 800; color: #003399; margin-bottom: 6px; }
+        .contact-card p { font-size: 0.8rem; color: #888; }
+        .contact-card .btn-small {
+            display: inline-block;
+            margin-top: 12px;
+            background: #003399;
+            color: white;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .contact-card .btn-small:hover { background: #0055cc; }
+
+        /* ===== CONTACT FORM ===== */
+        .form-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,102,0.08);
+            margin-bottom: 25px;
+        }
+        .form-section h2 { font-size: 1.3rem; font-weight: 700; color: #003399; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        @media(max-width:600px){ .form-row { grid-template-columns: 1fr; } }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; color: #444; margin-bottom: 6px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e8edf5;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #003399; }
+        .form-group textarea { resize: vertical; min-height: 110px; }
+        .subject-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+        .subject-chip {
+            padding: 7px 14px;
+            border: 2px solid #e8edf5;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            color: #555;
+        }
+        .subject-chip.selected { background: #003399; color: white; border-color: #003399; }
+        .rating-stars { display: flex; gap: 8px; margin-bottom: 15px; }
+        .star { font-size: 1.8rem; cursor: pointer; color: #ddd; transition: color 0.2s; }
+        .star.active { color: #FFC200; }
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #003399, #0055cc);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,51,153,0.3); }
+
+        /* ===== MAP ===== */
+        .map-wrapper {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,102,0.08);
+            margin-bottom: 25px;
+        }
+        .map-wrapper h2 { font-size: 1.2rem; font-weight: 700; color: #003399; margin-bottom: 15px; }
+        .map-placeholder {
+            background: linear-gradient(135deg, #e8f0fe, #f0f4ff);
+            border-radius: 14px;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #b0c4f8;
+            color: #555;
+            gap: 12px;
+        }
+        .map-placeholder i { font-size: 3rem; color: #003399; }
+        .map-placeholder h3 { font-size: 1.1rem; font-weight: 700; }
+        .map-placeholder p { font-size: 0.85rem; text-align: center; padding: 0 20px; }
+        .map-info-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
+        .map-info-item { display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #555; }
+        .map-info-item i { color: #003399; width: 18px; }
+
+        /* ===== HOURS TABLE ===== */
+        .hours-table { width: 100%; border-collapse: collapse; }
+        .hours-table th { background: #003399; color: white; padding: 12px; text-align: left; font-size: 0.85rem; }
+        .hours-table td { padding: 12px; border-bottom: 1px solid #f0f4ff; font-size: 0.85rem; }
+        .hours-table tr:hover td { background: #f8f9ff; }
+        .open-badge { background: #d4edda; color: #28a745; padding: 3px 10px; border-radius: 10px; font-size: 0.75rem; font-weight: 700; }
+        .closed-badge { background: #fde8e8; color: #dc3545; padding: 3px 10px; border-radius: 10px; font-size: 0.75rem; font-weight: 700; }
+
+        /* ===== ABOUT SECTION ===== */
+        .about-hero {
+            background: linear-gradient(135deg, #003399, #0055cc);
+            border-radius: 20px;
+            padding: 40px 30px;
+            color: white;
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        .about-hero::before {
+            content: '⛽';
+            font-size: 10rem;
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            opacity: 0.08;
+        }
+        .about-hero h2 { font-size: 2rem; font-weight: 800; margin-bottom: 10px; }
+        .about-hero p { font-size: 1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        .about-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 15px; margin: 25px 0; }
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 22px 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,102,0.08);
+        }
+        .stat-num { font-size: 2rem; font-weight: 800; color: #003399; }
+        .stat-label { font-size: 0.78rem; color: #888; margin-top: 4px; }
+        .stat-icon { font-size: 1.6rem; margin-bottom: 8px; }
+
+        .about-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; margin-bottom: 25px; }
+        .about-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,102,0.07);
+            border-left: 4px solid #003399;
+        }
+        .about-card .icon { font-size: 2rem; margin-bottom: 12px; }
+        .about-card h3 { font-size: 1rem; font-weight: 700; color: #222; margin-bottom: 8px; }
+        .about-card p { font-size: 0.82rem; color: #666; line-height: 1.6; }
+
+        /* ===== TEAM ===== */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 18px; margin-bottom: 25px; }
+        .team-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,102,0.07);
+            transition: transform 0.3s;
+        }
+        .team-card:hover { transform: translateY(-5px); }
+        .team-avatar {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #003399, #0077cc);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem;
+            margin: 0 auto 12px;
+            color: white;
+        }
+        .team-card h3 { font-size: 0.92rem; font-weight: 700; color: #222; }
+        .team-card .role { font-size: 0.78rem; color: #003399; font-weight: 600; margin: 4px 0; }
+        .team-card .exp { font-size: 0.75rem; color: #888; }
+
+        /* ===== CERTIFICATES ===== */
+        .cert-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .cert-item {
+            background: linear-gradient(135deg, #fff8e1, #ffffff);
+            border: 2px solid #FFC200;
+            border-radius: 14px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .cert-item .cert-icon { font-size: 2rem; }
+        .cert-item h4 { font-size: 0.88rem; font-weight: 700; color: #222; }
+        .cert-item p { font-size: 0.75rem; color: #888; }
+
+        /* ===== SECTION TITLE ===== */
+        .section-title { font-size: 1.3rem; font-weight: 800; color: #003399; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+        .section-title::after { content: ''; flex: 1; height: 2px; background: linear-gradient(to right, #003399, transparent); }
+
+        /* ===== SUCCESS ===== */
+        .success-msg {
+            display: none;
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border: 2px solid #28a745;
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            margin-top: 15px;
+        }
+        .success-msg i { font-size: 3rem; color: #28a745; margin-bottom: 10px; }
+        .success-msg h3 { color: #155724; font-size: 1.2rem; font-weight: 700; }
+        .success-msg p { color: #155724; font-size: 0.9rem; }
+
+        /* ===== SOCIAL ===== */
+        .social-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 15px; }
+        .social-btn {
+            display: flex; align-items: center; gap: 8px;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .social-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.15); }
+        .social-btn.whatsapp { background: #25D366; color: white; }
+        .social-btn.facebook { background: #1877F2; color: white; }
+        .social-btn.twitter { background: #1DA1F2; color: white; }
+        .social-btn.youtube { background: #FF0000; color: white; }
+
+        /* ===== FOOTER ===== */
+        .page-footer {
+            background: #002266;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+        .page-footer span { color: #FFC200; font-weight: 700; }
+    </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav class="top-nav">
+    <a href="index.html" class="nav-logo">
+        <i class="fas fa-fire" style="color:#FFC200;"></i> Ambika HP Gas Agency
+    </a>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="booking.html">Book</a>
+        <a href="tracking.html">Track</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="services.html">Services</a>
+        <a href="contact.html" class="active">Contact</a>
+    </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+    <div class="header-badge">📞 Get In Touch</div>
+    <h1>Contact & About Us</h1>
+    <p>We are here to help you — 24/7!</p>
+</div>
+
+<!-- TABS -->
+<div class="page-tabs">
+    <button class="tab-btn active" onclick="showTab('contact')"><i class="fas fa-phone"></i> Contact Us</button>
+    <button class="tab-btn" onclick="showTab('about')"><i class="fas fa-building"></i> About Us</button>
+    <button class="tab-btn" onclick="showTab('feedback')"><i class="fas fa-star"></i> Feedback</button>
+    <button class="tab-btn" onclick="showTab('team')"><i class="fas fa-users"></i> Our Team</button>
+</div>
+
+<!-- ===================== CONTACT TAB ===================== -->
+<div id="tab-contact" class="section active">
+
+    <!-- Contact Info Cards -->
+    <div class="contact-grid">
+        <div class="contact-card blue" onclick="window.location='tel:+919876543210'">
+            <div class="contact-icon"><i class="fas fa-phone"></i></div>
+            <h3>📞 Call Us</h3>
+            <div class="value">+91 98765 43210</div>
+            <p>Mon–Sat: 8 AM – 8 PM</p>
+            <a href="tel:+919876543210" class="btn-small"><i class="fas fa-phone"></i> Call Now</a>
+        </div>
+        <div class="contact-card yellow" onclick="window.open('https://wa.me/919876543210')">
+            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+            <h3>💬 WhatsApp</h3>
+            <div class="value">+91 98765 43210</div>
+            <p>Chat 24/7 – Instant Reply!</p>
+            <a href="https://wa.me/919876543210" class="btn-small" style="background:#25D366;"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+        <div class="contact-card green" onclick="window.location='mailto:hpgas.agency@gmail.com'">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <h3>📧 Email</h3>
+            <div class="value" style="font-size:0.95rem;">hpgas.agency@gmail.com</div>
+            <p>Reply within 24 hours</p>
+            <a href="mailto:hpgas.agency@gmail.com" class="btn-small" style="background:#28a745;"><i class="fas fa-envelope"></i> Send Email</a>
+        </div>
+        <div class="contact-card red">
+            <div class="contact-icon"><i class="fas fa-exclamation-triangle"></i></div>
+            <h3>🚨 Emergency</h3>
+            <div class="value">1906</div>
+            <p>Gas leakage — Call immediately!</p>
+            <a href="tel:1906" class="btn-small" style="background:#dc3545;"><i class="fas fa-phone"></i> Emergency</a>
+        </div>
+    </div>
+
+    <!-- Address + Map -->
+    <div class="map-wrapper">
+        <h2><i class="fas fa-map-marker-alt" style="color:#003399;"></i> Visit Our Agency</h2>
+        <div class="map-placeholder">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3>Ambika HP Gas Agency — Nashik</h3>
+            <p>Plot No. 42, MIDC Industrial Area,<br>Satpur, Nashik – 422007, Maharashtra</p>
+            <a href="https://maps.google.com" target="_blank" style="margin-top:10px; background:#003399; color:white; padding:10px 22px; border-radius:20px; text-decoration:none; font-size:0.85rem; font-weight:700;">
+                <i class="fas fa-directions"></i> Get Directions
+            </a>
+        </div>
+        <div class="map-info-row">
+            <div class="map-info-item"><i class="fas fa-map-marker-alt"></i> Satpur MIDC, Nashik – 422007</div>
+            <div class="map-info-item"><i class="fas fa-bus"></i> Satpur Bus Stop – 5 min walk</div>
+            <div class="map-info-item"><i class="fas fa-parking"></i> Free Parking Available</div>
+            <div class="map-info-item"><i class="fas fa-clock"></i> Mon–Sat: 8 AM – 8 PM</div>
+        </div>
+    </div>
+
+    <!-- Office Hours -->
+    <div class="form-section">
+        <h2><i class="fas fa-clock"></i> Office Hours</h2>
+        <table class="hours-table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Opening Time</th>
+                    <th>Closing Time</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Monday</td><td>8:00 AM</td><td>8:00 PM</td><td><span class="open-badge">✅ Open</span></td></tr>
+                <tr><td>Tuesday</td><td>8:00 AM</td><td>8:00 PM</td><td><span class="open-badge">✅ Open</span></td></tr>
+                <tr><td>Wednesday</td><td>8:00 AM</td><td>8:00 PM</td><td><span class="open-badge">✅ Open</span></td></tr>
+                <tr><td>Thursday</td><td>8:00 AM</td><td>8:00 PM</td><td><span class="open-badge">✅ Open</span></td></tr>
+                <tr><td>Friday</td><td>8:00 AM</td><td>8:00 PM</td><td><span class="open-badge">✅ Open</span></td></tr>
+                <tr><td>Saturday</td><td>9:00 AM</td><td>5:00 PM</td><td><span class="open-badge">✅ Open</span></td></tr>
+                <tr><td>Sunday</td><td>—</td><td>—</td><td><span class="closed-badge">❌ Closed</span></td></tr>
+                <tr><td>Public Holiday</td><td>—</td><td>—</td><td><span class="closed-badge">❌ Closed</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Social Media -->
+    <div class="form-section">
+        <h2><i class="fas fa-share-alt"></i> Follow Us on Social Media</h2>
+        <p style="font-size:0.85rem;color:#666;margin-bottom:15px;">Follow us for the latest offers, updates and gas prices!</p>
+        <div class="social-row">
+            <a href="#" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+            <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+            <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i> Twitter</a>
+            <a href="#" class="social-btn youtube"><i class="fab fa-youtube"></i> YouTube</a>
+        </div>
+    </div>
+</div>
+
+<!-- ===================== ABOUT TAB ===================== -->
+<div id="tab-about" class="section">
+
+    <!-- Hero -->
+    <div class="about-hero">
+        <div style="font-size:3.5rem;margin-bottom:10px;">⛽</div>
+        <h2>Ambika HP Gas Agency — Nashik</h2>
+        <p>Serving Nashik households since 2003. Your Trust, Our Responsibility!</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="about-stats">
+        <div class="stat-card">
+            <div class="stat-icon">🏠</div>
+            <div class="stat-num" id="cnt1">0</div>
+            <div class="stat-label">Happy Customers</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">📅</div>
+            <div class="stat-num" id="cnt2">0</div>
+            <div class="stat-label">Years of Service</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🚚</div>
+            <div class="stat-num" id="cnt3">0</div>
+            <div class="stat-label">Daily Deliveries</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-num" id="cnt4">0</div>
+            <div class="stat-label">Avg. Rating</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-num" id="cnt5">0</div>
+            <div class="stat-label">Staff Members</div>
+        </div>
+    </div>
+
+    <!-- About Cards -->
+
+    <div class="section-title"><i class="fas fa-info-circle"></i> About Us</div>
+    <div class="about-cards">
+        <div class="about-card">
+            <div class="icon">🎯</div>
+            <h3>Our Mission</h3>
+            <p>To provide safe, affordable and timely LPG delivery to every household in Nashik.</p>
+        </div>
+        <div class="about-card">
+            <div class="icon">👁️</div>
+            <h3>Our Vision</h3>
+            <p>To become Maharashtra's #1 trusted Ambika HP Gas Agency by 2030 — driven by technology and customer trust.</p>
+        </div>
+        <div class="about-card">
+            <div class="icon">💎</div>
+            <h3>Our Values</h3>
+            <p>Transparency, Safety, Punctuality, and Customer First — these 4 pillars define how we work.</p>
+        </div>
+        <div class="about-card">
+            <div class="icon">🏆</div>
+            <h3>Achievements</h3>
+            <p>Honored with HP Gas Best Distributor Award 3 times. Zero accident record in 22 years!</p>
+        </div>
+    </div>
+
+    <!-- Certificates -->
+    <div class="section-title"><i class="fas fa-certificate"></i> Certificates & Approvals</div>
+    <div class="cert-list" style="margin-bottom:25px;">
+        <div class="cert-item">
+            <div class="cert-icon">🏅</div>
+            <div><h4>HP Gas Official Distributor</h4><p>Since 2003 — License No. HPCL/NAS/2003/1042</p></div>
+        </div>
+        <div class="cert-item">
+            <div class="cert-icon">📋</div>
+            <div><h4>PNGRB Registered</h4><p>Petroleum & Natural Gas Reg. Board certified</p></div>
+        </div>
+        <div class="cert-item">
+            <div class="cert-icon">🛡️</div>
+            <div><h4>ISO 9001:2015</h4><p>Quality Management System Certified</p></div>
+        </div>
+        <div class="cert-item">
+            <div class="cert-icon">🔥</div>
+            <div><h4>Fire Safety Certified</h4><p>Maharashtra Fire Department Approved</p></div>
+        </div>
+    </div>
+
+    <!-- Story -->
+    <div class="form-section">
+        <h2><i class="fas fa-book-open"></i> Our Story</h2>
+        <p style="font-size:0.88rem;color:#555;line-height:1.9;">
+            Back in 2003, when LPG delivery in Nashik was a real challenge, <strong>Mr. Ramesh Patil</strong> started a small agency with just 2 cylinders and 1 delivery van. His dream was simple — to ensure every home in Nashik had access to safe cooking gas.<br><br>
+            Today, 22 years later, we have <strong>15,000+ happy customers</strong>, <strong>8 delivery vehicles</strong>, and a dedicated team that handles 200+ deliveries every single day. By embracing technology, we launched online booking, live tracking and a digital complaints system — becoming Nashik's first Ambika Ambika HP Gas Agency to do so!<br><br>
+            We are with you — always! 🙏
+        </p>
+    </div>
+</div>
+
+<!-- ===================== FEEDBACK TAB ===================== -->
+<div id="tab-feedback" class="section">
+
+    <div class="form-section">
+        <h2><i class="fas fa-paper-plane"></i> Send Us a Message</h2>
+
+        <!-- Subject Chips -->
+        <div class="form-group">
+            <label>📌 Select a Subject</label>
+            <div class="subject-chips">
+                <span class="subject-chip" onclick="selectChip(this)">📦 Delivery Issue</span>
+                <span class="subject-chip" onclick="selectChip(this)">💰 Billing Query</span>
+                <span class="subject-chip" onclick="selectChip(this)">📝 New Connection</span>
+                <span class="subject-chip" onclick="selectChip(this)">🔄 Cylinder Refund</span>
+                <span class="subject-chip" onclick="selectChip(this)">⭐ Feedback</span>
+                <span class="subject-chip" onclick="selectChip(this)">❓ General Query</span>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>👤 Your Name *</label>
+                <input type="text" placeholder="e.g. Ramesh Patil" id="msgName">
+            </div>
+            <div class="form-group">
+                <label>📱 Phone Number *</label>
+                <input type="tel" placeholder="10 digit number" id="msgPhone">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>📧 Email</label>
+                <input type="email" placeholder="your@email.com" id="msgEmail">
+            </div>
+            <div class="form-group">
+                <label>🔢 Consumer Number</label>
+                <input type="text" placeholder="Optional" id="msgConsumer">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>💬 Message *</label>
+            <textarea placeholder="Write your message here..." id="msgText"></textarea>
+        </div>
+
+        <!-- Rating -->
+        <div class="form-group">
+            <label>⭐ Rate Our Service</label>
+            <div class="rating-stars">
+                <span class="star" onclick="setRating(1)">★</span>
+                <span class="star" onclick="setRating(2)">★</span>
+                <span class="star" onclick="setRating(3)">★</span>
+                <span class="star" onclick="setRating(4)">★</span>
+                <span class="star" onclick="setRating(5)">★</span>
+            </div>
+            <div id="ratingText" style="font-size:0.8rem;color:#888;"></div>
+        </div>
+
+        <button class="submit-btn" onclick="submitMessage()">
+            <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+
+        <div class="success-msg" id="msgSuccess">
+            <i class="fas fa-check-circle"></i>
+            <h3>Message Received! 🎉</h3>
+            <p>Thank you! We will reply within 24 hours.<br>Your Reference No: <strong id="refNum"></strong></p>
+        </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="form-section">
+        <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions (FAQ)</h2>
+        <div id="faqList"></div>
+    </div>
+</div>
+
+<!-- ===================== TEAM TAB ===================== -->
+<div id="tab-team" class="section">
+
+    <div class="section-title"><i class="fas fa-users"></i> Our Team</div>
+    <div class="team-grid">
+        <div class="team-card">
+            <div class="team-avatar">👨‍💼</div>
+            <h3>Ramesh Patil</h3>
+            <div class="role">Agency Owner & Director</div>
+            <div class="exp">⭐ 22 Years Experience</div>
+        </div>
+        <div class="team-card">
+            <div class="team-avatar">👩‍💻</div>
+            <h3>Sunita Patil</h3>
+            <div class="role">Office Manager</div>
+            <div class="exp">⭐ 15 Years Experience</div>
+        </div>
+        <div class="team-card">
+            <div class="team-avatar">👨‍🔧</div>
+            <h3>Manoj Shinde</h3>
+            <div class="role">Delivery Supervisor</div>
+            <div class="exp">⭐ 10 Years Experience</div>
+        </div>
+        <div class="team-card">
+            <div class="team-avatar">👨‍💻</div>
+            <h3>Rahul More</h3>
+            <div class="role">IT & Booking Manager</div>
+            <div class="exp">⭐ 5 Years Experience</div>
+        </div>
+        <div class="team-card">
+            <div class="team-avatar">👷</div>
+            <h3>Vijay Kamble</h3>
+            <div class="role">Senior Delivery Boy</div>
+            <div class="exp">⭐ 8 Years Experience</div>
+        </div>
+        <div class="team-card">
+            <div class="team-avatar">👷</div>
+            <h3>Santosh Jadhav</h3>
+            <div class="role">Senior Delivery Boy</div>
+            <div class="exp">⭐ 7 Years Experience</div>
+        </div>
+        <div class="team-card">
+            <div class="team-avatar">👩</div>
+            <h3>Priya Deshmukh</h3>
+            <div class="role">Customer Support</div>
+            <div class="exp">⭐ 3 Years Experience</div>
+        </div>
+        <div class="team-card">
+            <div class="team-avatar">👨</div>
+            <h3>Deepak Salve</h3>
+            <div class="role">Accounts & Billing</div>
+            <div class="exp">⭐ 6 Years Experience</div>
+        </div>
+    </div>
+
+    <!-- Values -->
+    <div class="form-section">
+        <h2><i class="fas fa-heart"></i> Our Team Values</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;">
+            <div style="background:#e8f0fe;border-radius:12px;padding:18px;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:8px;">🤝</div>
+                <h4 style="font-size:0.9rem;font-weight:700;color:#003399;">Team Work</h4>
+                <p style="font-size:0.78rem;color:#555;">One heart, one team</p>
+            </div>
+            <div style="background:#fff3cd;border-radius:12px;padding:18px;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:8px;">⏰</div>
+                <h4 style="font-size:0.9rem;font-weight:700;color:#856404;">Punctuality</h4>
+                <p style="font-size:0.78rem;color:#555;">Always on-time delivery</p>
+            </div>
+            <div style="background:#d4edda;border-radius:12px;padding:18px;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:8px;">🛡️</div>
+                <h4 style="font-size:0.9rem;font-weight:700;color:#155724;">Safety First</h4>
+                <p style="font-size:0.78rem;color:#555;">Zero accident target</p>
+            </div>
+            <div style="background:#fde8e8;border-radius:12px;padding:18px;text-align:center;">
+                <div style="font-size:2rem;margin-bottom:8px;">❤️</div>
+                <h4 style="font-size:0.9rem;font-weight:700;color:#842029;">Customer Love</h4>
+                <p style="font-size:0.78rem;color:#555;">Customer is king</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+    <p>🔥 <span>Ambika HP Gas Agency, Nashik</span> | Made with ❤️ for Exhibition 2025 | © 2025 All Rights Reserved</p>
+    <p style="margin-top:6px;opacity:0.7;">Emergency: <span>1906</span> | Helpline: <span>1800-233-3555</span></p>
+</div>
+
+<script>
+// Tab switching
+function showTab(tab) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    event.target.classList.add('active');
+
+    // Trigger counters on about tab
+    if (tab === 'about') animateCounters();
+}
+
+// Subject chips
+function selectChip(el) {
+    document.querySelectorAll('.subject-chip').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+}
+
+// Star Rating
+let currentRating = 0;
+const ratingLabels = ['', '😞 Very Poor', '😐 Average', '🙂 Good', '😊 Very Good', '🤩 Excellent!'];
+function setRating(n) {
+    currentRating = n;
+    document.querySelectorAll('.star').forEach((s, i) => {
+        s.classList.toggle('active', i < n);
+    });
+    document.getElementById('ratingText').textContent = ratingLabels[n];
+}
+
+// Submit message
+function submitMessage() {
+    const name = document.getElementById('msgName').value.trim();
+    const phone = document.getElementById('msgPhone').value.trim();
+    const msg = document.getElementById('msgText').value.trim();
+    if (!name || !phone || !msg) { alert('Please fill in name, phone and message!'); return; }
+    const ref = 'MSG' + Date.now().toString().slice(-8);
+    document.getElementById('refNum').textContent = ref;
+    document.getElementById('msgSuccess').style.display = 'block';
+    document.getElementById('msgSuccess').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Counter animation
+function animateCounters() {
+    const targets = [15000, 22, 200, 4.9, 15];
+    const ids = ['cnt1','cnt2','cnt3','cnt4','cnt5'];
+    const suffixes = ['+', '+', '+', '/5', '+'];
+    ids.forEach((id, i) => {
+        let start = 0;
+        const end = targets[i];
+        const step = end / 60;
+        const el = document.getElementById(id);
+        const timer = setInterval(() => {
+            start += step;
+            if (start >= end) { start = end; clearInterval(timer); }
+            el.textContent = (i === 3 ? start.toFixed(1) : Math.floor(start).toLocaleString()) + suffixes[i];
+        }, 25);
+    });
+}
+
+// FAQ Data
+const faqs = [
+    { q: "Which number should I call for gas booking?", a: "You can call our helpline at +91 98765 43210, or book online directly from our website." },
+    { q: "How long will the delivery take?", a: "Delivery is done within 24–48 hours of booking. Express same-day delivery is also available for an extra ₹50." },
+    { q: "How do I get a new gas connection?", a: "Visit our agency or apply via the New Connection form on the Services page. Documents required: Aadhaar, Photo, Address proof." },
+    { q: "What is the current gas cylinder price?", a: "The 14.2 kg domestic cylinder is priced at ₹903. Check the Pricing page for the most updated rates." },
+    { q: "What should I do if there is a gas leak?", a: "Immediately call 1906, turn off the gas, open all windows, and do not operate any switches. Full guide is available on the Safety page." },
+];
+const faqContainer = document.getElementById('faqList');
+faqs.forEach((f, i) => {
+    faqContainer.innerHTML += `
+        <div style="border:2px solid #e8edf5;border-radius:12px;margin-bottom:10px;overflow:hidden;">
+            <div onclick="toggleFAQ(${i})" style="padding:15px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:0.88rem;">
+                <span>${f.q}</span> <i class="fas fa-chevron-down" id="faqicon${i}" style="color:#003399;transition:transform 0.3s;"></i>
+            </div>
+            <div id="faq${i}" style="display:none;padding:0 18px 15px;font-size:0.84rem;color:#555;line-height:1.7;">${f.a}</div>
+        </div>
+    `;
+});
+function toggleFAQ(i) {
+    const el = document.getElementById('faq' + i);
+    const icon = document.getElementById('faqicon' + i);
+    const open = el.style.display === 'block';
+    el.style.display = open ? 'none' : 'block';
+    icon.style.transform = open ? 'rotate(0)' : 'rotate(180deg)';
+}
+</script>
+
+</body>
+</html>

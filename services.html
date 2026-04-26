@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services – Ambika HP Gas Agency</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #f0f4ff; }
+
+    /* NAVBAR */
+    .navbar { background: #003087; }
+    .navbar-brand { color: #FFD700 !important; font-weight: 700; font-size: 1.3rem; }
+    .nav-link { color: #fff !important; }
+    .nav-link:hover, .nav-link.active { color: #FFD700 !important; }
+
+    /* HERO */
+    .services-hero {
+      background: linear-gradient(135deg, #003087 0%, #0055c4 100%);
+      color: white;
+      padding: 60px 0 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .services-hero::before {
+      content: '⚙️';
+      position: absolute;
+      font-size: 220px;
+      opacity: 0.05;
+      top: -40px; right: -30px;
+    }
+    .services-hero h1 { font-size: 2.3rem; font-weight: 800; }
+    .services-hero p  { opacity: 0.85; font-size: 1rem; margin-top: 10px; }
+
+    /* SECTION */
+    .section { max-width: 950px; margin: 0 auto; padding: 48px 16px 0; }
+    .sec-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #003087;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .sec-title::after { content: ''; flex: 1; height: 2px; background: #e0e7ff; }
+
+    /* MAIN SERVICE CARDS */
+    .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+    .service-card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px 24px;
+      box-shadow: 0 6px 24px rgba(0,48,135,0.09);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-top: 5px solid #003087;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: #f0f4ff;
+      transform: translate(30px, 30px);
+    }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(0,48,135,0.15); }
+    .service-card.yellow { border-top-color: #FFD700; }
+    .service-card.green  { border-top-color: #1a7a4a; }
+    .service-card.red    { border-top-color: #c0392b; }
+    .service-card.orange { border-top-color: #e67e22; }
+    .service-card.purple { border-top-color: #8e44ad; }
+
+    .sc-icon { font-size: 2.6rem; margin-bottom: 14px; display: block; }
+    .sc-title { font-size: 1.05rem; font-weight: 700; color: #003087; margin-bottom: 8px; }
+    .sc-desc  { font-size: 0.85rem; color: #666; line-height: 1.6; margin-bottom: 16px; }
+    .sc-list  { list-style: none; padding: 0; margin-bottom: 18px; }
+    .sc-list li { font-size: 0.82rem; color: #555; padding: 4px 0; display: flex; align-items: center; gap: 8px; }
+    .sc-list li::before { content: '✅'; font-size: 0.75rem; }
+    .btn-service {
+      display: inline-block;
+      background: #003087;
+      color: white;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-service:hover { background: #0044cc; color: white; }
+    .service-card.yellow .btn-service { background: #FFD700; color: #003087; }
+    .service-card.yellow .btn-service:hover { background: #e6c200; }
+    .service-card.green  .btn-service { background: #1a7a4a; }
+    .service-card.red    .btn-service { background: #c0392b; }
+    .service-card.orange .btn-service { background: #e67e22; }
+    .service-card.purple .btn-service { background: #8e44ad; }
+
+    /* HOW IT WORKS */
+    .hiw-steps { display: flex; gap: 0; flex-wrap: wrap; }
+    .hiw-step {
+      flex: 1;
+      min-width: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 22px 14px;
+      position: relative;
+    }
+    .hiw-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -10px; top: 32px;
+      font-size: 1.4rem;
+      color: #003087;
+      font-weight: 700;
+    }
+    @media(max-width:600px) { .hiw-step:not(:last-child)::after { display: none; } }
+    .hiw-num {
+      width: 50px; height: 50px;
+      background: #003087;
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.1rem;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 14px rgba(0,48,135,0.25);
+    }
+    .hiw-icon { font-size: 1.5rem; margin-bottom: 8px; }
+    .hiw-title { font-weight: 700; color: #003087; font-size: 0.9rem; margin-bottom: 4px; }
+    .hiw-desc  { font-size: 0.78rem; color: #666; }
+
+    /* DOCUMENTS */
+    .doc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    .doc-card {
+      background: white;
+      border-radius: 14px;
+      padding: 20px 18px;
+      box-shadow: 0 4px 16px rgba(0,48,135,0.07);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      transition: transform 0.2s;
+    }
+    .doc-card:hover { transform: translateY(-3px); }
+    .doc-icon { font-size: 1.8rem; flex-shrink: 0; }
+    .doc-info h6 { font-weight: 700; color: #003087; font-size: 0.88rem; margin-bottom: 4px; }
+    .doc-info p  { font-size: 0.78rem; color: #888; margin: 0; }
+
+    /* TIMING */
+    .timing-card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 6px 24px rgba(0,48,135,0.08);
+    }
+    .timing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    .timing-item {
+      background: #f0f4ff;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .timing-item .ti-day { font-weight: 700; color: #003087; font-size: 0.92rem; }
+    .timing-item .ti-time { font-size: 0.85rem; color: #555; margin-top: 4px; }
+    .timing-item.closed .ti-time { color: #c0392b; font-weight: 600; }
+    .timing-item .ti-icon { font-size: 1.4rem; margin-bottom: 6px; display: block; }
+
+    /* DELIVERY ZONES */
+    
+    .zone-card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 6px 24px rgba(0,48,135,0.08);
+    }
+    .zone-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 10px; }
+    .zone-item {
+      background: #f0f4ff;
+      border-radius: 10px;
+      padding: 11px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.87rem;
+      font-weight: 500;
+      color: #003087;
+    }
+    .zone-dot { width: 10px; height: 10px; border-radius: 50%; background: #1a7a4a; flex-shrink: 0; }
+
+    /* STATS STRIP */
+    .stats-strip {
+      background: #003087;
+      color: white;
+      border-radius: 18px;
+      padding: 28px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 20px;
+      text-align: center;
+      margin-top: 48px;
+    }
+    .stat-num  { font-size: 2rem; font-weight: 800; color: #FFD700; }
+    .stat-label{ font-size: 0.82rem; opacity: 0.85; margin-top: 4px; }
+
+    /* CTA */
+    .cta-section {
+      background: linear-gradient(135deg, #FFD700 0%, #f39c12 100%);
+      border-radius: 18px;
+      padding: 38px 28px;
+      text-align: center;
+      margin: 48px auto;
+      max-width: 950px;
+    }
+    .cta-section h3 { font-weight: 800; color: #003087; font-size: 1.5rem; }
+    .cta-section p  { color: #1a3060; font-size: 0.95rem; margin: 10px 0 22px; }
+    .btn-cta {
+      display: inline-block;
+      background: #003087;
+      color: white;
+      border-radius: 12px;
+      padding: 14px 36px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      margin: 6px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-cta:hover { background: #002060; color: white; transform: translateY(-2px); }
+    .btn-cta.outline {
+      background: transparent;
+      border: 2px solid #003087;
+      color: #003087;
+    }
+    .btn-cta.outline:hover { background: #003087; color: white; }
+
+    /* FOOTER */
+    footer { background: #003087; color: white; text-align: center; padding: 22px; font-size: 0.9rem; }
+    footer a { color: #FFD700; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🔵 Ambika HP Gas Agency</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="booking.html">Book Cylinder</a></li>
+        <li class="nav-item"><a class="nav-link" href="tracking.html">Track Order</a></li>
+        <li class="nav-item"><a class="nav-link" href="complaint.html">Complaint</a></li>
+        <li class="nav-item"><a class="nav-link" href="safety.html">Safety</a></li>
+        <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="services-hero">
+  <div class="container">
+    <h1>⚙️ Our Services</h1>
+    <p>Complete HP Gas solutions — from new connections to doorstep delivery</p>
+  </div>
+</div>
+
+<div class="container" style="padding-bottom: 10px;">
+
+  <!-- MAIN SERVICES -->
+  <div class="section">
+    <div class="sec-title">🛢️ What We Offer</div>
+    <div class="service-grid">
+
+      <div class="service-card">
+        <span class="sc-icon">🔵</span>
+        <div class="sc-title">New Gas Connection</div>
+        <div class="sc-desc">Get a brand new Ambika HP Gas Agency for your home. Quick processing, minimal documentation.</div>
+        <ul class="sc-list">
+          <li>Aadhaar & address proof required</li>
+          <li>14.2 kg cylinder included</li>
+          <li>Free regulator + rubber pipe</li>
+          <li>KYC verification done at home</li>
+        </ul>
+        <a href="booking.html" class="btn-service">Apply Now →</a>
+      </div>
+
+      <div class="service-card yellow">
+        <span class="sc-icon">🔄</span>
+        <div class="sc-title">Cylinder Refill Booking</div>
+        <div class="sc-desc">Book your next cylinder refill online. Get doorstep delivery within 24-48 hours.</div>
+        <ul class="sc-list">
+          <li>Book online anytime 24/7</li>
+          <li>Delivery in 24–48 hours</li>
+          <li>Meesho-style live tracking</li>
+          <li>Free home delivery</li>
+        </ul>
+        <a href="booking.html" class="btn-service">Book Refill →</a>
+      </div>
+
+      <div class="service-card green">
+        <span class="sc-icon">🔁</span>
+        <div class="sc-title">Cylinder Exchange</div>
+        <div class="sc-desc">Exchange your empty cylinder with a filled one. Same day service available.</div>
+        <ul class="sc-list">
+          <li>14.2 kg ↔ 5 kg exchange</li>
+          <li>Safety inspection included</li>
+          <li>Same day processing</li>
+          <li>Visit agency or home pickup</li>
+        </ul>
+        <a href="contact.html" class="btn-service">Request Exchange →</a>
+      </div>
+
+      <div class="service-card red">
+        <span class="sc-icon">🚨</span>
+        <div class="sc-title">Emergency Service</div>
+        <div class="sc-desc">Gas leakage or urgent cylinder need? Our emergency team is available round the clock.</div>
+        <ul class="sc-list">
+          <li>24/7 emergency helpline: 1906</li>
+          <li>Response within 30 minutes</li>
+          <li>Trained safety technicians</li>
+          <li>Free emergency visit</li>
+        </ul>
+        <a href="tel:1906" class="btn-service">Call 1906 Now →</a>
+      </div>
+
+      <div class="service-card orange">
+        <span class="sc-icon">🏢</span>
+        <div class="sc-title">Commercial Connection</div>
+        <div class="sc-desc">Bulk LPG solutions for restaurants, hotels, schools and industrial establishments.</div>
+        <ul class="sc-list">
+          <li>19 kg & 47.5 kg cylinders</li>
+          <li>Bulk order discounts available</li>
+          <li>Dedicated account manager</li>
+          <li>Priority delivery scheduling</li>
+        </ul>
+        <a href="contact.html" class="btn-service">Enquire Now →</a>
+      </div>
+
+      <div class="service-card purple">
+        <span class="sc-icon">🔧</span>
+        <div class="sc-title">Maintenance & Repair</div>
+        <div class="sc-desc">Regulator replacement, pipe inspection and safety audit by certified technicians.</div>
+        <ul class="sc-list">
+          <li>ISI-certified spare parts only</li>
+          <li>Regulator replacement service</li>
+          <li>Annual safety audit</li>
+          <li>Pipe & fitting inspection</li>
+        </ul>
+        <a href="contact.html" class="btn-service">Schedule Visit →</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+   
+   <div style="text-align:center; margin:16px 0;">
+  <img src="images/delivery-man.jpg.jpeg" style="height:250px; width:250px; object-fit:contain;"/>
+</div>
+  <div class="section">
+    <div class="sec-title">📋 How Refill Booking Works</div>
+    <div style="background:white; border-radius:18px; padding:28px; box-shadow:0 6px 24px rgba(0,48,135,0.08);">
+      <div class="hiw-steps">
+        <div class="hiw-step">
+          <div class="hiw-num">1</div>
+          <div class="hiw-icon">📝</div>
+          <div class="hiw-title">Fill Booking Form</div>
+          <div class="hiw-desc">Enter your consumer number, name & address on our website</div>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">2</div>
+          <div class="hiw-icon">✅</div>
+          <div class="hiw-title">Get Order ID</div>
+          <div class="hiw-desc">Unique Order ID generated instantly (e.g. HPG20250425001)</div>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">3</div>
+          <div class="hiw-icon">📦</div>
+          <div class="hiw-title">Agency Confirms</div>
+          <div class="hiw-desc">Our agency confirms your booking within 2 hours</div>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">4</div>
+          <div class="hiw-icon">🚚</div>
+          <div class="hiw-title">Delivery Dispatched</div>
+          <div class="hiw-desc">Track live — delivery boy name & ETA shown on tracking page</div>
+        </div>
+        <div class="hiw-step">
+          <div class="hiw-num">5</div>
+          <div class="hiw-icon">🏠</div>
+          <div class="hiw-title">Delivered!</div>
+          <div class="hiw-desc">Cylinder delivered to your doorstep. Payment on delivery.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCUMENTS REQUIRED -->
+  <div class="section">
+    <div class="sec-title">📄 Documents Required (New Connection)</div>
+    <div class="doc-grid">
+      <div class="doc-card">
+        <div class="doc-icon">🪪</div>
+        <div class="doc-info">
+          <h6>Aadhaar Card</h6>
+          <p>Original + photocopy. Identity & address proof.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">🗳️</div>
+        <div class="doc-info">
+          <h6>Voter ID / PAN</h6>
+          <p>Any one government-issued photo ID card.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">🏠</div>
+        <div class="doc-info">
+          <h6>Address Proof</h6>
+          <p>Electricity bill / Rent agreement / Bank passbook.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📸</div>
+        <div class="doc-info">
+          <h6>Passport Photos</h6>
+          <p>2 recent passport-size photographs (colour).</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">📱</div>
+        <div class="doc-info">
+          <h6>Mobile Number</h6>
+          <p>Linked to Aadhaar for OTP verification.</p>
+        </div>
+      </div>
+      <div class="doc-card">
+        <div class="doc-icon">🏦</div>
+        <div class="doc-info">
+          <h6>Bank Account</h6>
+          <p>For DBTL subsidy — Aadhaar-linked account details.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AGENCY TIMING -->
+  <div class="section">
+    <div class="sec-title">🕐 Agency Working Hours</div>
+    <div class="timing-card">
+      <div class="timing-grid">
+        <div class="timing-item">
+          <span class="ti-icon">📅</span>
+          <div class="ti-day">Monday</div>
+          <div class="ti-time">9:00 AM – 6:00 PM</div>
+        </div>
+        <div class="timing-item">
+          <span class="ti-icon">📅</span>
+          <div class="ti-day">Tuesday</div>
+          <div class="ti-time">9:00 AM – 6:00 PM</div>
+        </div>
+        <div class="timing-item">
+          <span class="ti-icon">📅</span>
+          <div class="ti-day">Wednesday</div>
+          <div class="ti-time">9:00 AM – 6:00 PM</div>
+        </div>
+        <div class="timing-item">
+          <span class="ti-icon">📅</span>
+          <div class="ti-day">Thursday</div>
+          <div class="ti-time">9:00 AM – 6:00 PM</div>
+        </div>
+        <div class="timing-item">
+          <span class="ti-icon">📅</span>
+          <div class="ti-day">Friday</div>
+          <div class="ti-time">9:00 AM – 6:00 PM</div>
+        </div>
+        <div class="timing-item">
+          <span class="ti-icon">📅</span>
+          <div class="ti-day">Saturday</div>
+          <div class="ti-time">9:00 AM – 2:00 PM</div>
+        </div>
+        <div class="timing-item closed">
+          <span class="ti-icon">🔴</span>
+          <div class="ti-day">Sunday</div>
+          <div class="ti-time">CLOSED</div>
+        </div>
+        <div class="timing-item">
+          <span class="ti-icon">🚨</span>
+          <div class="ti-day">Emergency</div>
+          <div class="ti-time">24/7 — Call 1906</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELIVERY ZONES -->
+  <div class="section">
+    <div class="sec-title">📍 Delivery Zones — Nashik</div>
+    <div class="zone-card">
+      <p style="color:#555; font-size:0.88rem; margin-bottom:16px;">We deliver to all major areas of Nashik city and surrounding regions:</p>
+      <div class="zone-list">
+        <div class="zone-item"><div class="zone-dot"></div> Nashik Road</div>
+        <div class="zone-item"><div class="zone-dot"></div> Gangapur Road</div>
+        <div class="zone-item"><div class="zone-dot"></div> College Road</div>
+        <div class="zone-item"><div class="zone-dot"></div> Panchavati</div>
+        <div class="zone-item"><div class="zone-dot"></div> Cidco</div>
+        <div class="zone-item"><div class="zone-dot"></div> Satpur</div>
+        <div class="zone-item"><div class="zone-dot"></div> Ambad</div>
+        <div class="zone-item"><div class="zone-dot"></div> Dwarka</div>
+        <div class="zone-item"><div class="zone-dot"></div> Indira Nagar</div>
+        <div class="zone-item"><div class="zone-dot"></div> Pathardi Phata</div>
+        <div class="zone-item"><div class="zone-dot"></div> Trimbak Road</div>
+        <div class="zone-item"><div class="zone-dot"></div> Mumbai Naka</div>
+        <div class="zone-item"><div class="zone-dot"></div> Mahatma Nagar</div>
+        <div class="zone-item"><div class="zone-dot"></div> New Nashik</div>
+        <div class="zone-item"><div class="zone-dot"></div> Deolali Camp</div>
+        <div class="zone-item"><div class="zone-dot"></div> Igatpuri</div>
+      </div>
+      <p style="font-size:0.8rem; color:#aaa; margin-top:14px;">📞 For areas not listed, please call us at <strong style="color:#003087;">+91 98230 00000</strong></p>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="section">
+    <div class="stats-strip">
+      <div>
+        <div class="stat-num">5,000+</div>
+        <div class="stat-label">Happy Customers</div>
+      </div>
+      <div>
+        <div class="stat-num">24 hrs</div>
+        <div class="stat-label">Avg Delivery Time</div>
+      </div>
+      <div>
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years of Service</div>
+      </div>
+      <div>
+        <div class="stat-num">99%</div>
+        <div class="stat-label">Customer Satisfaction</div>
+      </div>
+      <div>
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Emergency Support</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="container" style="padding: 0 16px;">
+  <div class="cta-section">
+    <h3>🚀 Ready to Book Your Cylinder?</h3>
+    <p>Fast, reliable and free home delivery across Nashik. Book in under 2 minutes!</p>
+    <a href="booking.html" class="btn-cta">📝 Book Now</a>
+    <a href="contact.html" class="btn-cta outline">📞 Contact Us</a>
+  </div>
+</div>
+
+<footer>
+  <p>🔵 Ambika HP Gas Agency &nbsp;|&nbsp; Emergency: <a href="tel:1906">1906</a> &nbsp;|&nbsp; Fire: <a href="tel:101">101</a></p>
+  <p style="margin-top:6px; opacity:0.7;">&copy; 2025 Ambika HP Gas Agency. All rights reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

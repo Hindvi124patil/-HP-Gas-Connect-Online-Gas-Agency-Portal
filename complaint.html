@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Complaint Portal – Ambika HP Gas Agency</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Poppins', sans-serif; background: #f0f4ff; }
+
+    /* NAVBAR */
+    .navbar { background: #003087; }
+    .navbar-brand { color: #FFD700 !important; font-weight: 700; font-size: 1.3rem; }
+    .nav-link { color: #fff !important; }
+    .nav-link:hover { color: #FFD700 !important; }
+
+    /* HERO */
+    .complaint-hero {
+      background: linear-gradient(135deg, #003087 0%, #0055c4 100%);
+      color: white;
+      padding: 55px 0 50px;
+      text-align: center;
+    }
+    .complaint-hero h1 { font-size: 2.1rem; font-weight: 700; }
+    .complaint-hero p { opacity: 0.85; font-size: 1rem; margin-top: 8px; }
+
+    /* HELPLINE STRIP */
+    .helpline-strip {
+      background: #FFD700;
+      color: #003087;
+      text-align: center;
+      padding: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .helpline-strip a { color: #003087; font-weight: 700; text-decoration: none; }
+
+    /* TABS */
+    .tab-row {
+      display: flex;
+      gap: 12px;
+      max-width: 780px;
+      margin: 36px auto 0;
+      padding: 0 16px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 13px;
+      border-radius: 12px;
+      border: 2px solid #003087;
+      background: white;
+      color: #003087;
+      font-weight: 600;
+      font-size: 0.97rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: #003087;
+      color: white;
+    }
+
+    /* MAIN CARD */
+    .main-card {
+      background: white;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(0,48,135,0.10);
+      padding: 36px;
+      max-width: 780px;
+      margin: 24px auto 50px;
+    }
+
+    /* SECTION TITLES */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #003087;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e0e7ff;
+    }
+
+    /* FORM */
+    .form-label { font-weight: 600; color: #333; font-size: 0.92rem; margin-bottom: 5px; }
+    .form-control, .form-select {
+      border: 2px solid #e0e7ff;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+      font-family: 'Poppins', sans-serif;
+      transition: border 0.2s;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: #003087;
+      box-shadow: none;
+      outline: none;
+    }
+
+    /* COMPLAINT TYPE CARDS */
+    .type-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .type-card {
+      border: 2px solid #e0e7ff;
+      border-radius: 12px;
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: white;
+    }
+    .type-card:hover { border-color: #003087; background: #f0f4ff; }
+    .type-card.selected { border-color: #003087; background: #003087; color: white; }
+    .type-card .tc-icon { font-size: 1.6rem; display: block; margin-bottom: 6px; }
+    .type-card .tc-label { font-size: 0.82rem; font-weight: 600; }
+
+    /* PRIORITY */
+    .priority-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 8px; }
+    .priority-btn {
+      flex: 1; min-width: 100px;
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #e0e7ff;
+      background: white;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .priority-btn:hover { border-color: #003087; }
+    .priority-btn.sel-low    { background: #e6f9ef; border-color: #1a7a4a; color: #1a7a4a; }
+    .priority-btn.sel-medium { background: #fff3cd; border-color: #856404; color: #856404; }
+    .priority-btn.sel-high   { background: #ffe0e0; border-color: #c0392b; color: #c0392b; }
+
+    /* PHOTO UPLOAD */
+    .upload-area {
+      border: 2px dashed #003087;
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      background: #f8f9ff;
+    }
+    .upload-area:hover { background: #e8eeff; }
+    .upload-area input { display: none; }
+    .upload-icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+    .upload-area p { color: #555; font-size: 0.88rem; margin: 0; }
+    #previewImg { max-width: 100%; border-radius: 10px; margin-top: 12px; display: none; }
+
+    /* SUBMIT BUTTON */
+    .btn-submit {
+      background: #003087;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      width: 100%;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      font-family: 'Poppins', sans-serif;
+      margin-top: 8px;
+    }
+    .btn-submit:hover { background: #0044cc; transform: translateY(-2px); }
+
+    /* SUCCESS CARD */
+    .success-card {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+      animation: fadeIn 0.5s;
+    }
+    .success-card.show { display: block; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(20px);} to {opacity:1;transform:translateY(0);} }
+    .success-icon { font-size: 4rem; margin-bottom: 16px; }
+    .complaint-id-box {
+      background: #f0f4ff;
+      border: 2px solid #003087;
+      border-radius: 14px;
+      padding: 20px;
+      display: inline-block;
+      margin: 18px auto;
+    }
+    .complaint-id-box .cid { font-size: 1.5rem; font-weight: 700; color: #003087; }
+    .complaint-id-box small { color: #888; font-size: 0.85rem; }
+
+    /* STATUS TRACKER */
+    .status-track {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      margin: 24px 0;
+      flex-wrap: wrap;
+    }
+    .st-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      min-width: 90px;
+      position: relative;
+    }
+    .st-step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 18px; left: 60%;
+      width: 80%; height: 3px;
+      background: #e0e7ff;
+    }
+    .st-dot {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      z-index: 1;
+    }
+    .st-dot.done { background: #003087; color: white; }
+    .st-dot.pending { background: #e0e7ff; color: #aaa; }
+    .st-label { font-size: 0.75rem; color: #555; font-weight: 500; text-align: center; }
+
+    /* STATUS LOOKUP */
+    .lookup-box {
+      display: none;
+    }
+    .lookup-box.show { display: block; }
+
+    /* FOOTER */
+    footer { background: #003087; color: white; text-align: center; padding: 20px; font-size: 0.9rem; }
+    footer a { color: #FFD700; text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🔵 Ambika HP Gas Agency</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="booking.html">Book Cylinder</a></li>
+        <li class="nav-item"><a class="nav-link" href="tracking.html">Track Order</a></li>
+        <li class="nav-item"><a class="nav-link active" href="complaint.html">Complaint</a></li>
+        <li class="nav-item"><a class="nav-link" href="safety.html">Safety</a></li>
+        <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HELPLINE -->
+<div class="helpline-strip">
+  🚨 Emergency Gas Helpline: <a href="tel:1906">1906</a> &nbsp;|&nbsp; Available 24/7
+</div>
+
+<!-- HERO -->
+<div class="complaint-hero">
+  <div class="container">
+    <h1>😤 Complaint Portal</h1>
+    <p>Register your complaint or check existing complaint status</p>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- TABS -->
+  <div class="tab-row">
+    <div class="tab-btn active" id="tabRegister" onclick="switchTab('register')">📝 Register Complaint</div>
+    <div class="tab-btn" id="tabStatus" onclick="switchTab('status')">🔍 Check Status</div>
+  </div>
+
+  <!-- MAIN CARD -->
+  <div class="main-card">
+
+    <!-- ====== REGISTER FORM ====== -->
+    <div id="registerSection">
+
+      <!-- SUCCESS -->
+      <div class="success-card" id="successCard">
+        <div class="success-icon">✅</div>
+        <h4 style="color:#003087; font-weight:700;">Complaint Registered!</h4>
+        <p style="color:#555; margin-top:6px;">Your complaint has been received. We will resolve it within 48 hours.</p>
+
+        <div class="complaint-id-box">
+          <small>Your Complaint ID</small>
+          <div class="cid" id="generatedCID">—</div>
+          <small>Save this ID to track your complaint</small>
+        </div>
+
+        <div class="status-track">
+          <div class="st-step">
+            <div class="st-dot done">✅</div>
+            <div class="st-label">Submitted</div>
+          </div>
+          <div class="st-step">
+            <div class="st-dot pending">👀</div>
+            <div class="st-label">Under Review</div>
+          </div>
+          <div class="st-step">
+            <div class="st-dot pending">🔧</div>
+            <div class="st-label">In Progress</div>
+          </div>
+          <div class="st-step">
+            <div class="st-dot pending">✔️</div>
+            <div class="st-label">Resolved</div>
+          </div>
+        </div>
+
+        <button class="btn-submit" style="max-width:300px; margin: 0 auto; display:block;"
+          onclick="resetForm()">📝 Register Another Complaint</button>
+      </div>
+
+      <!-- FORM -->
+      <div id="complaintForm">
+        <div class="section-title">📋 Personal Details</div>
+        <div class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label">Full Name *</label>
+            <input type="text" class="form-control" id="cName" placeholder="Enter your full name"/>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Mobile Number *</label>
+            <input type="tel" class="form-control" id="cPhone" placeholder="10-digit mobile number"/>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Consumer Number *</label>
+            <input type="text" class="form-control" id="cConsumer" placeholder="e.g. HP-MH-20341"/>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Email (Optional)</label>
+            <input type="email" class="form-control" id="cEmail" placeholder="your@email.com"/>
+          </div>
+        </div>
+
+        <div class="section-title">⚠️ Complaint Type</div>
+        <div class="type-grid mb-4">
+          <div class="type-card" onclick="selectType(this, 'Late Delivery')">
+            <span class="tc-icon">🕐</span>
+            <span class="tc-label">Late Delivery</span>
+          </div>
+          <div class="type-card" onclick="selectType(this, 'Gas Leakage')">
+            <span class="tc-icon">💨</span>
+            <span class="tc-label">Gas Leakage</span>
+          </div>
+          <div class="type-card" onclick="selectType(this, 'Wrong Cylinder')">
+            <span class="tc-icon">🔄</span>
+            <span class="tc-label">Wrong Cylinder</span>
+          </div>
+          <div class="type-card" onclick="selectType(this, 'Billing Issue')">
+            <span class="tc-icon">💰</span>
+            <span class="tc-label">Billing Issue</span>
+          </div>
+          <div class="type-card" onclick="selectType(this, 'Rude Behavior')">
+            <span class="tc-icon">😠</span>
+            <span class="tc-label">Rude Behavior</span>
+          </div>
+          <div class="type-card" onclick="selectType(this, 'Damaged Cylinder')">
+            <span class="tc-icon">🛢️</span>
+            <span class="tc-label">Damaged Cylinder</span>
+          </div>
+          <div class="type-card" onclick="selectType(this, 'No Delivery')">
+            <span class="tc-icon">🚫</span>
+            <span class="tc-label">No Delivery</span>
+          </div>
+          <div class="type-card" onclick="selectType(this, 'Other')">
+            <span class="tc-icon">📌</span>
+            <span class="tc-label">Other</span>
+          </div>
+        </div>
+        <input type="hidden" id="selectedType"/>
+
+        <div class="section-title">📝 Complaint Details</div>
+        <div class="mb-3">
+          <label class="form-label">Priority Level</label>
+          <div class="priority-row">
+            <button class="priority-btn" onclick="selectPriority(this, 'Low', 'sel-low')">🟢 Low</button>
+            <button class="priority-btn" onclick="selectPriority(this, 'Medium', 'sel-medium')">🟡 Medium</button>
+            <button class="priority-btn" onclick="selectPriority(this, 'High', 'sel-high')">🔴 High / Urgent</button>
+          </div>
+          <input type="hidden" id="selectedPriority"/>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Description *</label>
+          <textarea class="form-control" id="cDescription" rows="4"
+            placeholder="Describe your complaint in detail — what happened, when, and any other relevant info..."></textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Order ID (if applicable)</label>
+          <input type="text" class="form-control" id="cOrderId" placeholder="e.g. HPG20250425001"/>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">📷 Upload Photo (Optional)</label>
+          <div class="upload-area" onclick="document.getElementById('photoInput').click()">
+            <span class="upload-icon">📸</span>
+            <p>Click to upload a photo of the issue</p>
+            <p style="color:#aaa; font-size:0.8rem;">JPG, PNG supported · Max 5MB</p>
+            <input type="file" id="photoInput" accept="image/*" onchange="previewPhoto(this)"/>
+          </div>
+          <img id="previewImg" src="" alt="Preview"/>
+        </div>
+
+        <button class="btn-submit" onclick="submitComplaint()">📤 Submit Complaint</button>
+      </div>
+
+    </div><!-- /registerSection -->
+
+    <!-- ====== STATUS LOOKUP ====== -->
+    <div id="statusSection" style="display:none;">
+      <div class="section-title">🔍 Check Complaint Status</div>
+      <div class="mb-3">
+        <label class="form-label">Enter Complaint ID</label>
+        <input type="text" class="form-control" id="statusInput" placeholder="e.g. CMP20250425001"/>
+      </div>
+      <button class="btn-submit" onclick="checkStatus()">Check Status</button>
+
+      <div id="statusResult" style="display:none; margin-top:28px;">
+        <div style="background:#f0f4ff; border-radius:14px; padding:22px;">
+          <div style="font-weight:700; color:#003087; font-size:1.1rem;" id="srId">—</div>
+          <div style="color:#555; font-size:0.9rem; margin: 6px 0 16px;" id="srDetails">—</div>
+          <div class="status-track" id="srTrack"></div>
+          <div style="margin-top:12px; font-size:0.88rem; color:#888;">
+            📞 For urgent issues call: <strong>1906</strong>
+          </div>
+        </div>
+      </div>
+
+      <div id="statusNotFound" style="display:none; text-align:center; padding:32px; color:#888;">
+        <div style="font-size:3rem;">🔎</div>
+        <h5 style="margin-top:12px;">Complaint ID not found</h5>
+        <p>Please check the ID or call 1906 for help.</p>
+      </div>
+    </div>
+
+  </div><!-- /main-card -->
+</div><!-- /container -->
+
+<footer>
+  <p>🔵 Ambika HP Gas Agency &nbsp;|&nbsp; Helpline: <a href="tel:1906">1906</a> &nbsp;|&nbsp; Fire: <a href="tel:101">101</a></p>
+  <p style="margin-top:4px; opacity:0.7;">&copy; 2025 Ambika HP Gas Agency. All rights reserved.</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+// TAB SWITCH
+function switchTab(tab) {
+  document.getElementById('registerSection').style.display = tab === 'register' ? 'block' : 'none';
+  document.getElementById('statusSection').style.display   = tab === 'status'   ? 'block' : 'none';
+  document.getElementById('tabRegister').className = 'tab-btn' + (tab === 'register' ? ' active' : '');
+  document.getElementById('tabStatus').className   = 'tab-btn' + (tab === 'status'   ? ' active' : '');
+}
+
+// SELECT TYPE
+let selectedType = '';
+function selectType(el, type) {
+  document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedType = type;
+  document.getElementById('selectedType').value = type;
+}
+
+// SELECT PRIORITY
+let selectedPriority = '';
+function selectPriority(el, val, cls) {
+  document.querySelectorAll('.priority-btn').forEach(b => b.className = 'priority-btn');
+  el.classList.add(cls);
+  selectedPriority = val;
+  document.getElementById('selectedPriority').value = val;
+}
+
+// PHOTO PREVIEW
+function previewPhoto(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = document.getElementById('previewImg');
+    img.src = e.target.result;
+    img.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+// GENERATE COMPLAINT ID
+function generateCID() {
+  const now = new Date();
+  const d = now.toISOString().slice(0,10).replace(/-/g,'');
+  const r = Math.floor(Math.random() * 900 + 100);
+  return 'CMP' + d + r;
+}
+
+// SUBMIT COMPLAINT
+function submitComplaint() {
+  const name     = document.getElementById('cName').value.trim();
+  const phone    = document.getElementById('cPhone').value.trim();
+  const consumer = document.getElementById('cConsumer').value.trim();
+  const desc     = document.getElementById('cDescription').value.trim();
+
+  if (!name)     { alert('Please enter your name!'); return; }
+  if (!/^\d{10}$/.test(phone)) { alert('Please enter a valid 10-digit mobile number!'); return; }
+  if (!consumer) { alert('Please enter your Consumer Number!'); return; }
+  if (!selectedType) { alert('Please select a complaint type!'); return; }
+  if (!desc)     { alert('Please describe your complaint!'); return; }
+
+  const cid = generateCID();
+
+  // Save to localStorage
+  const complaint = {
+    id: cid,
+    name, phone, consumer,
+    type: selectedType,
+    priority: selectedPriority || 'Medium',
+    description: desc,
+    orderId: document.getElementById('cOrderId').value.trim(),
+    date: new Date().toLocaleString(),
+    status: 'submitted'
+  };
+  localStorage.setItem('hpgas_complaint_' + cid, JSON.stringify(complaint));
+
+  // Show success
+  document.getElementById('generatedCID').textContent = cid;
+  document.getElementById('complaintForm').style.display = 'none';
+  document.getElementById('successCard').classList.add('show');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// RESET
+function resetForm() {
+  document.getElementById('cName').value = '';
+  document.getElementById('cPhone').value = '';
+  document.getElementById('cConsumer').value = '';
+  document.getElementById('cEmail').value = '';
+  document.getElementById('cDescription').value = '';
+  document.getElementById('cOrderId').value = '';
+  document.getElementById('previewImg').style.display = 'none';
+  document.querySelectorAll('.type-card').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.priority-btn').forEach(b => b.className = 'priority-btn');
+  selectedType = ''; selectedPriority = '';
+  document.getElementById('successCard').classList.remove('show');
+  document.getElementById('complaintForm').style.display = 'block';
+}
+
+// CHECK STATUS
+function checkStatus() {
+  const input = document.getElementById('statusInput').value.trim().toUpperCase();
+  document.getElementById('statusResult').style.display = 'none';
+  document.getElementById('statusNotFound').style.display = 'none';
+
+  if (!input) { alert('Please enter a Complaint ID!'); return; }
+
+  // Demo statuses
+  const demos = {
+    'CMP20250425001': { name: 'Priya Sharma', type: 'Late Delivery', date: '25 Apr 2025', status: 'resolved' },
+    'CMP20250425002': { name: 'Rohit Jadhav', type: 'Gas Leakage', date: '25 Apr 2025', status: 'inprogress' },
+    'CMP20250425003': { name: 'Sneha Kulkarni', type: 'Billing Issue', date: '25 Apr 2025', status: 'review' },
+  };
+
+  let complaint = demos[input] || null;
+  if (!complaint) {
+    const saved = localStorage.getItem('hpgas_complaint_' + input);
+    if (saved) {
+      const c = JSON.parse(saved);
+      complaint = { name: c.name, type: c.type, date: c.date, status: c.status };
+    }
+  }
+
+  if (!complaint) {
+    document.getElementById('statusNotFound').style.display = 'block';
+    return;
+  }
+
+  const statusSteps = [
+    { label: 'Submitted', icon: '✅', states: ['submitted','review','inprogress','resolved'] },
+    { label: 'Under Review', icon: '👀', states: ['review','inprogress','resolved'] },
+    { label: 'In Progress', icon: '🔧', states: ['inprogress','resolved'] },
+    { label: 'Resolved', icon: '✔️', states: ['resolved'] },
+  ];
+
+  const trackHtml = statusSteps.map(s => {
+    const done = s.states.includes(complaint.status);
+    return `<div class="st-step">
+      <div class="st-dot ${done ? 'done' : 'pending'}">${done ? s.icon : '—'}</div>
+      <div class="st-label">${s.label}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('srId').textContent = input;
+  document.getElementById('srDetails').innerHTML =
+    `👤 ${complaint.name} &nbsp;|&nbsp; ⚠️ ${complaint.type} &nbsp;|&nbsp; 📅 ${complaint.date}`;
+  document.getElementById('srTrack').innerHTML = trackHtml;
+  document.getElementById('statusResult').style.display = 'block';
+}
+
+// Enter key for status
+document.addEventListener('DOMContentLoaded', () => {
+  const si = document.getElementById('statusInput');
+  if (si) si.addEventListener('keydown', e => { if (e.key === 'Enter') checkStatus(); });
+});
+</script>
+</body>
+</html>
